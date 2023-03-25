@@ -2,7 +2,7 @@
 	"parent": "minecraft:block/cube_bottom_top",
 	"textures": {
 		"bottom": "thelimit:block/glaucolit",
-		"side": "thelimit:block/hyphum_side",
-		"top": "thelimit:block/grass"
+		"side": "thelimit:block/hyphum_side_2",
+		"top": "thelimit:block/hyphum_top_2"
 	}
 }

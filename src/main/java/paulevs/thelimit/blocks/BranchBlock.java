@@ -15,6 +15,12 @@ public class BranchBlock extends TemplateBlockBase {
 	public BranchBlock(Identifier identifier) {
 		super(identifier, Material.WOOD);
 		setSounds(WOOD_SOUNDS);
+		
+		BlockState state = getDefaultState();
+		for (byte i = 0; i < 6; i++) {
+			state = state.with(TLBlockProperties.FACES[i], false);
+		}
+		setDefaultState(state);
 	}
 	
 	@Override

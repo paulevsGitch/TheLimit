@@ -1,5 +1,6 @@
 package paulevs.thelimit;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
 import net.modificationstation.stationapi.api.block.BlockState;
@@ -26,5 +27,9 @@ public class TheLimit {
 			if (state.isOpaque()) return y;
 		}
 		return 0;
+	}
+	
+	public static boolean isReplaceable(BlockState state) {
+		return state.isAir() || state.getMaterial().isReplaceable() || state.getMaterial() == Material.PLANT;
 	}
 }

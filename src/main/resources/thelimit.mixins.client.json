@@ -7,7 +7,8 @@
 		"LightingCalculatorImplMixin",
 		"JsonUnbakedModelMixin",
 		"WorldRendererMixin",
-		"BakedQuadMixin"
+		"BakedQuadMixin",
+		"ShadersMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

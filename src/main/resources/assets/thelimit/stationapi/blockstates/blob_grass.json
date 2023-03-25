@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"": [
+			{ "model": "thelimit:block/blob_grass_2" },
+			{ "model": "thelimit:block/blob_grass_2" }
+		]
+	}
+}

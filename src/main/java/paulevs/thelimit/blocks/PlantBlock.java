@@ -2,8 +2,8 @@ package paulevs.thelimit.blocks;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
+import net.minecraft.util.maths.Box;
 import net.modificationstation.stationapi.api.block.BlockState;
-import net.modificationstation.stationapi.api.item.ItemPlacementContext;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
@@ -26,9 +26,13 @@ public class PlantBlock extends TemplateBlockBase {
 	}
 	
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext context) {
-		if (!canPlace(context.getWorld(), context.getBlockPos())) return null;
-		return getDefaultState();
+	public boolean canPlaceAt(Level level, int x, int y, int z) {
+		return canPlace(level, new BlockPos(x, y, z));
+	}
+	
+	@Override
+	public Box getCollisionShape(Level level, int x, int y, int z) {
+		return null;
 	}
 	
 	protected boolean canPlace(Level level, BlockPos pos) {

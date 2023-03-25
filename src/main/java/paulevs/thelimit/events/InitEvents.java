@@ -76,8 +76,8 @@ public class InitEvents {
 	}
 	
 	private float getDensity(BlockPos.Mutable pos) {
-		double px = pos.getX() * 0.01;
-		double pz = pos.getZ() * 0.01;
+		double px = pos.getX() * 0.005;
+		double pz = pos.getZ() * 0.005;
 		
 		// Distortion
 		float dx = distortX.get(px, pz);
@@ -92,15 +92,10 @@ public class InitEvents {
 		float density = 0.9F - islandNoise.get(px, pz) * scale;
 		
 		float height = MathHelper.lerp(terrainNoise.get(px, pz), random.nextFloat(), 0.3F);
-		height = MathHelper.lerp(height, -30, 30);//terrainNoise.get(pos.getX() * 0.01, pos.getZ() * 0.01);
+		height = MathHelper.lerp(height, -30, 30);
 		
-		density += getGradient(pos.getY() + height, 125, -1 * scale, 0, -4);
-		
-		// Big details
-		density -= terrainNoise.get(pos.getX() * 0.05, pos.getY() * 0.05, pos.getZ() * 0.05) * 0.1F;
-		
-		// Small details
-		//density += terrainNoise.get(pos.getX() * 0.1, pos.getY() * 0.1, pos.getZ() * 0.1) * 0.01F;
+		density += getGradient(pos.getY() + height, 125, -1 * scale, 0, -4 * scale);
+		density -= terrainNoise.get(pos.getX() * 0.025, pos.getY() * 0.025, pos.getZ() * 0.025) * 0.1F;
 		
 		return density;
 	}

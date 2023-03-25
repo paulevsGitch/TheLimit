@@ -24,7 +24,7 @@ public class TheLimitBlocks {
 	public static final BlockBase STELLATA_BRANCH = make("stellata_branch", BranchBlock::new);
 	public static final BlockBase STELLATA_FLOWER = make("stellata_flower", StellataFlowerBlock::new);
 	
-	public static final BlockBase BLOB_GRASS = make("blob_grass", StellataFlowerBlock::new);
+	public static final BlockBase BLOB_GRASS = make("blob_grass", PlantBlock::new);
 	
 	private static BlockBase make(String name, Function<Identifier, BlockBase> constructor) {
 		Identifier id = TheLimit.id(name);

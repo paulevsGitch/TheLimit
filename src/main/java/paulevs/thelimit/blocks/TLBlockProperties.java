@@ -9,6 +9,10 @@ public class TLBlockProperties {
 	public static final EnumProperty<Axis> AXIS = EnumProperty.of("axis", Axis.class);
 	public static final BooleanProperty[] FACES = new BooleanProperty[6];
 	
+	public static BooleanProperty getFaceProp(Direction dir) {
+		return FACES[dir.getId()];
+	}
+	
 	static {
 		for (int i = 0; i < 6; i++) {
 			FACES[i] = BooleanProperty.of(Direction.byId(i).getName());

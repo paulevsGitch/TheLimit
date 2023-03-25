@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import paulevs.thelimit.rendering.EmissiveFunctions;
 import paulevs.thelimit.rendering.EmissiveQuad;
 
 @Mixin(value = JsonUnbakedModel.class, remap = false)
@@ -20,7 +21,9 @@ public class JsonUnbakedModelMixin {
 	private static void createQuad(ModelElement element, ModelElementFace elementFace, Sprite sprite, Direction side, ModelBakeSettings settings, Identifier id, CallbackInfoReturnable<BakedQuad> info) {
 		BakedQuad quad = info.getReturnValue();
 		if (sprite.getId().id.endsWith("_e")) {
-			EmissiveQuad.cast(quad).setEmissive(true);
+			EmissiveQuad emissiveQuad = EmissiveQuad.cast(quad);
+			emissiveQuad.setLightFunction(EmissiveFunctions.get(sprite.getId()));
+			emissiveQuad.setEmissive(true);
 		}
 	}
 }

@@ -13,6 +13,7 @@ import net.modificationstation.stationapi.impl.level.chunk.StationFlatteningChun
 import paulevs.thelimit.blocks.TheLimitBlocks;
 import paulevs.thelimit.noise.PerlinNoise;
 import paulevs.thelimit.noise.VoronoiNoise;
+import paulevs.thelimit.structures.StellataTreeStructure;
 
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -53,15 +54,27 @@ public class TheLimitWorldgen implements LevelSource {
 		return generateChunk(x, z);
 	}
 	
+	final StellataTreeStructure tree = new StellataTreeStructure();
+	
 	@Override
 	public void decorate(LevelSource level, int cx, int cz) {
 		// Biome populator here!
-		// final int wx = cx << 4;
-		// final int wz = cz << 4;
+		final int wx = cx << 4;
+		final int wz = cz << 4;
 		Chunk chunk = level.getChunk(cx, cz);
 		
 		BlockState hyphum = TheLimitBlocks.HYPHUM.getDefaultState();
+		BlockState grass = TheLimitBlocks.BLOB_GRASS.getDefaultState();
 		//BlockState vitilit = TheLimitBlocks.VITILIT.getDefaultState();
+		
+		random.setSeed(System.nanoTime());
+		
+		for (byte i = 0; i < 3; i++) {
+			int x = random.nextInt(16);
+			int z = random.nextInt(16);
+			int y = chunk.getHeight(x, z);
+			tree.generate(this.level, random, x | wx, y, z | wz);
+		}
 		
 		for (short i = 0; i < 256; i++) {
 			int px = i & 15;
@@ -69,8 +82,11 @@ public class TheLimitWorldgen implements LevelSource {
 			for (short py = 0; py < 255; py++) {
 				BlockState state = chunk.getBlockState(px, py, pz);
 				if (state.isOf(TheLimitBlocks.GLAUCOLIT)) {
-					if (chunk.getBlockState(px, py + 1, pz).isAir()) {
+					if (!chunk.getBlockState(px, py + 1, pz).isOf(TheLimitBlocks.GLAUCOLIT)) {
 						chunk.setBlockState(px, py, pz, hyphum);
+						if (random.nextInt(8) == 0) {
+							chunk.setBlockState(px, py + 1, pz, grass);
+						}
 					}
 					/*else if (chunk.getBlockState(px, py - 3, pz).isAir()) {
 						chunk.setBlockState(px, py, pz, vitilit);
@@ -137,10 +153,8 @@ public class TheLimitWorldgen implements LevelSource {
 				int dz = i >> 8;
 				int py = dy | wy;
 				if (cell1.get(dx, py, dz) > 0.5F) {
-					int type = random.nextInt(64);
 					float h = terrainNoise.get((dx | wx) * 0.1, py * 0.1, (dz | wz) * 0.1) * 10 + 5;
-					if (py < h) section.setBlockState(dx, dy, dz, type == 0 ? glowstone : vitilit);
-					else section.setBlockState(dx, dy, dz, type == 0 ? glowstone : glaucolit);
+					section.setBlockState(dx, dy, dz, py < h ? vitilit : glaucolit);
 				}
 			}
 		});
@@ -159,8 +173,8 @@ public class TheLimitWorldgen implements LevelSource {
 	}
 	
 	private float getDensity(BlockPos pos) {
-		double px = pos.getX() * 0.01;
-		double pz = pos.getZ() * 0.01;
+		double px = pos.getX() * 0.005;
+		double pz = pos.getZ() * 0.005;
 		
 		// Distortion
 		float dx = distortX.get(px, pz);
@@ -177,7 +191,7 @@ public class TheLimitWorldgen implements LevelSource {
 		float height = MathHelper.lerp(terrainNoise.get(px, pz), random.nextFloat(), 0.3F);
 		height = MathHelper.lerp(height, -30, 30);//terrainNoise.get(pos.getX() * 0.01, pos.getZ() * 0.01);
 		
-		density += getGradient(pos.getY() + height, 125, -1 * scale, 0, -4);
+		density += getGradient(pos.getY() + height, 125, -1 * scale, 0, -4 * scale);
 		
 		// Big details
 		density -= terrainNoise.get(pos.getX() * 0.05, pos.getY() * 0.05, pos.getZ() * 0.05) * 0.1F;

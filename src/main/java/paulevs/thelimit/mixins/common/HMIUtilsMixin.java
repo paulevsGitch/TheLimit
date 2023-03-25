@@ -12,11 +12,10 @@ import java.util.ArrayList;
 
 @Mixin(value = Utils.class, remap = false)
 public class HMIUtilsMixin {
+	// Don't work
 	@Inject(method = "itemList", at = @At("RETURN"))
-	private static void itemList(CallbackInfoReturnable<ArrayList<ItemInstance>> info) {
+	private static void thelimit_itemList(CallbackInfoReturnable<ArrayList<ItemInstance>> info) {
 		ArrayList<ItemInstance> list = info.getReturnValue();
-		System.out.println("Adding to HMI");
-		System.out.println(TheLimitBlocks.BLOCKS);
 		list.addAll(TheLimitBlocks.BLOCKS.stream().map(ItemInstance::new).toList());
 	}
 }
