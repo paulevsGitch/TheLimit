@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/cube_column",
+	"textures": {
+		"side": "thelimit:block/stellata_log_side_3",
+		"end": "thelimit:block/stellata_log_top"
+	}
+}

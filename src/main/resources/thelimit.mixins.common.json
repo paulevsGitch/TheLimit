@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "paulevs.thelimit.mixins.common",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+		"HMIUtilsMixin",
+		"BlockMixin",
+		"LevelMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

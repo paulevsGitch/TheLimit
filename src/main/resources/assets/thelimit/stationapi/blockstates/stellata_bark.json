@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"axis=x": [
+			{ "model": "thelimit:block/stellata_bark_1", "x": 90 },
+			{ "model": "thelimit:block/stellata_bark_2", "x": 90 },
+			{ "model": "thelimit:block/stellata_bark_3", "x": 90 }
+		],
+		"axis=y": [
+			{ "model": "thelimit:block/stellata_bark_1" },
+			{ "model": "thelimit:block/stellata_bark_2" },
+			{ "model": "thelimit:block/stellata_bark_3" }
+		],
+		"axis=z": [
+			{ "model": "thelimit:block/stellata_bark_1", "x": 90, "y": 90 },
+			{ "model": "thelimit:block/stellata_bark_2", "x": 90, "y": 90 },
+			{ "model": "thelimit:block/stellata_bark_3", "x": 90, "y": 90 }
+		]
+	}
+}

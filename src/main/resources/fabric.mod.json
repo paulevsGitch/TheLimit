@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "thelimit",
+	"version": "${version}",
+	
+	"name": "The Limit",
+	"description": "This mod adds new dimension - The Limit",
+	"authors": [
+		"paulevs"
+	],
+	"contact": {
+		"homepage": "https://glass-launcher.net/",
+		"sources": "https://github.com/calmilamsy/BIN-fabric-example-mod"
+	},
+	
+	"license": "MIT",
+	"icon": "",
+	
+	"environment": "*",
+	"entrypoints": {
+		"stationapi:event_bus": [
+			"paulevs.thelimit.events.InitEvents"
+		],
+		"stationapi:event_bus_client": [],
+		"stationapi:event_bus_server": []
+	},
+	"mixins": [
+		"thelimit.mixins.common.json",
+		"thelimit.mixins.client.json"
+	],
+	
+	"depends": {
+		"minecraft": "1.0.0-beta.7.3"
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "paulevs.thelimit.mixins.client",
+	"compatibilityLevel": "JAVA_8",
+	"client": [
+		"LightingCalculatorImplMixin",
+		"JsonUnbakedModelMixin",
+		"WorldRendererMixin",
+		"BakedQuadMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

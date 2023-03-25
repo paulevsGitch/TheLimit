@@ -1,0 +1,15 @@
+{
+	"variants": {
+		"axis=x": {
+			"model": "thelimit:block/stellata_stem", "x": 90
+		},
+		"axis=y": [
+			{ "model": "thelimit:block/stellata_stem", "weight": 2 },
+			{ "model": "thelimit:block/stellata_stem_2" },
+			{ "model": "thelimit:block/stellata_stem_2", "y": 90 }
+		],
+		"axis=z": {
+			"model": "thelimit:block/stellata_stem", "x": 90, "y": 90
+		}
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"": [
+			{"model": "thelimit:block/hyphum"},
+			{"model": "thelimit:block/hyphum", "y": 180}
+		]
+	}
+}

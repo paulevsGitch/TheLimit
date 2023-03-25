@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"": [
+			{"model": "thelimit:block/glaucolit"},
+			{"model": "thelimit:block/glaucolit", "y": 180},
+			{"model": "thelimit:block/glaucolit", "x": 180},
+			{"model": "thelimit:block/glaucolit", "x": 180, "y": 180}
+		]
+	}
+}

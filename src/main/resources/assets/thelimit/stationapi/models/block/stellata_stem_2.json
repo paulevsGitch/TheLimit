@@ -1,0 +1,34 @@
+{
+	"credit": "Made by paulevs",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "thelimit:block/stellata_stem",
+		"1": "thelimit:block/stellata_stem_2",
+		"2": "thelimit:block/stellata_stem_2_e",
+		"particle": "#0"
+	},
+	"elements": [
+		{
+			"name": "stem",
+			"from": [4, 0, 4],
+			"to": [12, 16, 12],
+			"faces": {
+				"north": {"uv": [8, 0, 16, 16], "texture": "#1"},
+				"east": {"uv": [8, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [8, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [8, 0, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#0", "cullface": "up"},
+				"down": {"uv": [0, 8, 8, 16], "texture": "#0", "cullface": "down"}
+			}
+		},
+		{
+			"name": "stem",
+			"from": [4, 0, 4],
+			"to": [12, 16, 12],
+			"faces": {
+				"north": {"uv": [8, 0, 16, 16], "texture": "#2"},
+				"south": {"uv": [8, 0, 16, 16], "texture": "#2"}
+			}
+		}
+	]
+}
