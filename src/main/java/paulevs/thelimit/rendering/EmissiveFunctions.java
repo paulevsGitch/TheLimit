@@ -1,9 +1,15 @@
 package paulevs.thelimit.rendering;
 
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.Minecraft;
+import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.thelimit.TheLimit;
+import paulevs.thelimit.blocks.DoublePlantBlock;
+import paulevs.thelimit.blocks.TLBlockProperties;
+import paulevs.thelimit.blocks.TLBlockProperties.TopBottom;
 import paulevs.thelimit.noise.PerlinNoise;
 
 import java.util.HashMap;
@@ -19,15 +25,30 @@ public class EmissiveFunctions {
 	
 	static {
 		PerlinNoise noise = new PerlinNoise(0);
-		//VoronoiNoise noise = new VoronoiNoise(0);
-		FUNCTIONS.put(
-			TheLimit.id("block/blob_grass_e"),
-			//pos -> noise.get(pos.getX() * 0.5, pos.getY() * 0.5, pos.getZ() * 0.5)
-			pos -> {
-				float value = noise.get(pos.getX() * 0.2, pos.getY() * 0.2, pos.getZ() * 0.2) * 4F - 2F;
-				value += (MathHelper.hashCode(pos.getX(), pos.getY(), pos.getZ()) & 15) / 15F;
-				return MathHelper.clamp(value, 0, 1);
+		Function<BlockPos, Float> grass = pos -> {
+			float value = noise.get(pos.getX() * 0.2, pos.getY() * 0.2, pos.getZ() * 0.2) * 4F - 2F;
+			value += (MathHelper.hashCode(pos.getX(), pos.getY(), pos.getZ()) & 15) / 32F;
+			return MathHelper.clamp(value, 0, 1);
+		};
+		
+		FUNCTIONS.put(TheLimit.id("block/blob_grass_e"), grass);
+		FUNCTIONS.put(TheLimit.id("block/blob_grass_small_e"), grass);
+		
+		grass = pos -> {
+			Minecraft mc = (Minecraft) FabricLoader.getInstance().getGameInstance();
+			BlockState state = mc.level.getBlockState(pos);
+			
+			int y = pos.getY();
+			if (state.getBlock() instanceof DoublePlantBlock && state.get(TLBlockProperties.TOP_BOTTOM) == TopBottom.TOP) {
+				y -= 1;
 			}
-		);
+			
+			float value = noise.get(pos.getX() * 0.2, y * 0.2, pos.getZ() * 0.2) * 4F - 2F;
+			value += (MathHelper.hashCode(pos.getX(), y, pos.getZ()) & 15) / 32F;
+			return MathHelper.clamp(value, 0, 1);
+		};
+		
+		FUNCTIONS.put(TheLimit.id("block/blob_grass_tall_bottom_e"), grass);
+		FUNCTIONS.put(TheLimit.id("block/blob_grass_tall_top_e"), grass);
 	}
 }

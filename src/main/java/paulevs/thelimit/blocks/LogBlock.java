@@ -14,6 +14,7 @@ public class LogBlock extends TemplateBlockBase {
 		super(identifier, Material.WOOD);
 		setDefaultState(getDefaultState().with(TLBlockProperties.AXIS, Axis.Y));
 		setSounds(WOOD_SOUNDS);
+		setHardness(1F);
 	}
 	
 	@Override

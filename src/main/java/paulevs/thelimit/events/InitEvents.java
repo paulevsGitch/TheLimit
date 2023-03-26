@@ -7,11 +7,12 @@ import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.DimensionRegistryEvent;
 import net.modificationstation.stationapi.api.registry.DimensionContainer;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
-import net.modificationstation.stationapi.api.util.math.BlockPos.Mutable;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.thelimit.TheLimit;
 import paulevs.thelimit.blocks.TheLimitBlocks;
 import paulevs.thelimit.config.Configs;
+import paulevs.thelimit.dimension.InterpolationCell;
+import paulevs.thelimit.dimension.IslandLayer;
 import paulevs.thelimit.dimension.TheLimitDimension;
 import paulevs.thelimit.noise.PerlinNoise;
 import paulevs.thelimit.noise.VoronoiNoise;
@@ -36,7 +37,7 @@ public class InitEvents {
 	@EventListener
 	public void saveConfigs(PostInitEvent event) {
 		Configs.saveAll();
-		//showIslands();
+		//showIslands2();
 	}
 	
 	final PerlinNoise terrainNoise = new PerlinNoise(0);
@@ -50,19 +51,49 @@ public class InitEvents {
 		int cx = img.getWidth() >> 1;
 		int cy = img.getHeight() >> 1;
 		
-		BlockPos.Mutable pos = new Mutable();
-		for (int x = 0; x < 512; x++) {
-			pos.setX(x - 256);
-			for (int y = 0; y < 256; y++) {
-				pos.setY(y);
-				for (int z = 0; z < 512; z++) {
-					pos.setZ(z - 256);
-					if (getDensity(pos) < 0.5) continue;
-					int px = ((pos.getZ() - pos.getX()) >> 1) + cx;
-					int py = (-y >> 1) + ((pos.getX() + pos.getZ()) >> 2) + cy;
-					if (px < 0 || py < 0 || px > img.getWidth() || py > img.getHeight()) continue;
+		int side = 16;
+		InterpolationCell cell = new InterpolationCell(
+			this::getDensity,
+			1024 / side + 1,
+			256 / side + 1,
+			side, side, 0
+		);
+		cell.update(-512, -512);
+		
+		//side = 32;
+		InterpolationCell cell2 = new InterpolationCell(
+			this::getDensity,
+			1024 / side + 1,
+			256 / side + 1,
+			side, side, 4
+		);
+		cell2.update(-512, -512);
+		
+		for (int x = 0; x < 1024; x ++) {
+			int dx = x - 512;
+			for (int z = 0; z < 1024; z ++) {
+				int dz = z - 512;
+				for (int y = 0; y < 256; y ++) {
+					int dy = y - 128;
+					int px = ((dz - dx) >> 1) + cx;
+					int py = (-dy >> 1) + ((dx + dz) >> 2) + cy;
+					
+					if (px < 0 || py < 0 || px >= img.getWidth() || py >= img.getHeight()) continue;
+					
+					//float density = MathHelper.lerp(0.25F, cell.get(x, y, z), cell2.get(x, y, z));
+					//float density = Math.max(cell.get(x, y, z), cell2.get(x, y, z));
+					//float density = cell.get(x, y, z);
+					//density += cell2.get(x, y, z);
+					
+					//if (density < 0.5F) continue;
+					float density = MathHelper.lerp(0.5F, cell.get(x, y, z), cell2.get(x, y, z));
+					
+					if (density < 0.5F) continue;
+					//if (cell2.get(x, y, z) < 0.45F) continue;
+					
 					int rgb = y;// << 1;
 					rgb = 255 << 24 | rgb << 16 | ((y & 1) * 64) << 8 | (255 - rgb);
+					
 					img.setRGB(px, py, rgb);
 				}
 			}
@@ -75,37 +106,78 @@ public class InitEvents {
 		frame.setVisible(true);
 	}
 	
-	private float getDensity(BlockPos.Mutable pos) {
-		double px = pos.getX() * 0.005;
-		double pz = pos.getZ() * 0.005;
+	private void showIslands2() {
+		BufferedImage img = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
+		int cx = img.getWidth() >> 1;
+		int cy = img.getHeight() >> 1;
 		
-		// Distortion
-		float dx = distortX.get(px, pz);
-		float dz = distortY.get(px, pz);
-		px += dx;
-		pz += dz;
+		InterpolationCell cell1 = new InterpolationCell(this::getDensity, 16, 0);
+		InterpolationCell cell2 = new InterpolationCell(this::getDensity, 16, 8);
 		
-		long seed = islandNoise.getID(px, pz);
-		random.setSeed(seed);
+		boolean update = false;
+		int chx = 100;
+		int chz = 100;
 		
-		float scale = MathHelper.lerp(random.nextFloat(), 1F, 1.5F);
-		float density = 0.9F - islandNoise.get(px, pz) * scale;
+		for (int x = 0; x < 1024; x ++) {
+			int dx = x - 512;
+			
+			int ncx = x >> 4;
+			if (ncx != chx) {
+				update = true;
+				chx = ncx;
+			}
+			
+			for (int z = 0; z < 1024; z ++) {
+				int dz = z - 512;
+				
+				int ncz = z >> 4;
+				if (ncz != chz) {
+					update = true;
+					chz = ncz;
+				}
+				
+				for (int y = 0; y < 256; y ++) {
+					int dy = y - 128;
+					int px = ((dz - dx) >> 1) + cx;
+					int py = (-dy >> 1) + ((dx + dz) >> 2) + cy;
+					
+					if (px < 0 || py < 0 || px >= img.getWidth() || py >= img.getHeight()) continue;
+					
+					if (update) {
+						update = false;
+						cell1.update(chx << 4, chz << 4);
+						cell2.update(chx << 4, chz << 4);
+					}
+					
+					float density = MathHelper.lerp(0.5F, cell1.get(x & 15, y, z & 15), cell2.get(x & 15, y, z & 15));
+					if (density < 0.5F) continue;
+					int rgb = y;
+					rgb = 255 << 24 | rgb << 16 | ((y & 1) * 64) << 8 | (255 - rgb);
+					
+					img.setRGB(px, py, rgb);
+				}
+			}
+		}
 		
-		float height = MathHelper.lerp(terrainNoise.get(px, pz), random.nextFloat(), 0.3F);
-		height = MathHelper.lerp(height, -30, 30);
-		
-		density += getGradient(pos.getY() + height, 125, -1 * scale, 0, -4 * scale);
-		density -= terrainNoise.get(pos.getX() * 0.025, pos.getY() * 0.025, pos.getZ() * 0.025) * 0.1F;
-		
-		return density;
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(new JLabel(new ImageIcon(img)));
+		frame.pack();
+		frame.setVisible(true);
 	}
 	
-	private float getGradient(float y, float level, float bottom, float middle, float top) {
-		if (y < level) {
-			return MathHelper.lerp(y / level, bottom, middle);
-		}
-		else {
-			return MathHelper.lerp((y - level) / (255 - level), middle, top);
-		}
+	IslandLayer layer = new IslandLayer(0, 120, 200, 1.0F);
+	IslandLayer layer2 = new IslandLayer(1, 80, 200, 0.75F);
+	IslandLayer layer3 = new IslandLayer(2, 160, 200, 0.75F);
+	
+	private float getDensity(BlockPos pos) {
+		float density = layer.getDensity(pos);
+		if (density > 0.55F) return density;
+		
+		density = Math.max(density, layer2.getDensity(pos));
+		if (density > 0.55F) return density;
+		
+		density = Math.max(density, layer3.getDensity(pos));
+		return density;
 	}
 }

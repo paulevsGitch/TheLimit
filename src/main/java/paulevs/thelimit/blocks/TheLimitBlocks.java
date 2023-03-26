@@ -3,7 +3,6 @@ package paulevs.thelimit.blocks;
 import net.minecraft.block.BlockBase;
 import net.minecraft.block.material.Material;
 import net.modificationstation.stationapi.api.registry.Identifier;
-import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
 import paulevs.thelimit.TheLimit;
 
 import java.util.ArrayList;
@@ -14,9 +13,9 @@ import java.util.function.Function;
 public class TheLimitBlocks {
 	public static final List<BlockBase> BLOCKS = new ArrayList<>();
 	
-	public static final BlockBase GLAUCOLIT = make("glaucolit", TemplateBlockBase::new, Material.STONE);
-	public static final BlockBase VITILIT = make("vitilit", TemplateBlockBase::new, Material.STONE);
-	public static final BlockBase HYPHUM = make("hyphum", TemplateBlockBase::new, Material.STONE);
+	public static final BlockBase GLAUCOLIT = make("glaucolit", StoneBlock::new);
+	public static final BlockBase VITILIT = make("vitilit", StoneBlock::new);
+	public static final BlockBase HYPHUM = make("hyphum", StoneBlock::new);
 	
 	public static final BlockBase STELLATA_LOG = make("stellata_log", LogBlock::new);
 	public static final BlockBase STELLATA_BARK = make("stellata_bark", LogBlock::new);
@@ -24,7 +23,9 @@ public class TheLimitBlocks {
 	public static final BlockBase STELLATA_BRANCH = make("stellata_branch", BranchBlock::new);
 	public static final BlockBase STELLATA_FLOWER = make("stellata_flower", StellataFlowerBlock::new);
 	
-	public static final BlockBase BLOB_GRASS = make("blob_grass", PlantBlock::new);
+	public static final BlockBase BLOB_GRASS_SHORT = make("blob_grass_short", PlantBlock::new);
+	public static final BlockBase BLOB_GRASS_NORMAL = make("blob_grass", PlantBlock::new);
+	public static final BlockBase BLOB_GRASS_TALL = make("blob_grass_tall", DoublePlantBlock::new);
 	
 	private static BlockBase make(String name, Function<Identifier, BlockBase> constructor) {
 		Identifier id = TheLimit.id(name);

@@ -13,6 +13,7 @@ public class StellataFlowerBlock extends TemplateBlockBase {
 	public StellataFlowerBlock(Identifier identifier) {
 		super(identifier, Material.WOOD);
 		setLightEmittance(1F);
+		setHardness(0.5F);
 	}
 	
 	@Override

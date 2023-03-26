@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"part=bottom": { "model": "thelimit:block/blob_grass_tall_bottom" },
+		"part=top": { "model": "thelimit:block/blob_grass_tall_top" }
+	}
+}

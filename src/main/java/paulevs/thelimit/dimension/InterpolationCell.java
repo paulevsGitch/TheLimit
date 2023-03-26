@@ -6,31 +6,41 @@ import net.modificationstation.stationapi.api.util.math.MathHelper;
 import java.util.function.Function;
 
 public class InterpolationCell {
-	private final BlockPos.Mutable origin = new BlockPos.Mutable();
 	private final Function<BlockPos, Float> generator;
 	private final float[][][] data;
+	private final int offset;
 	private final short width;
 	private final short height;
 	private final short dxz;
 	private final short dy;
 	
-	public InterpolationCell(Function<BlockPos, Float> generator, int width, int height, int dxz, int dy) {
+	public InterpolationCell(Function<BlockPos, Float> generator, int side, int offset) {
+		this(
+			generator,
+			(int) Math.ceil((float) (16 + offset) / side) + 1,
+			(int) Math.ceil((float) (256 + offset) / side) + 1,
+			side, side, offset
+		);
+	}
+	
+	public InterpolationCell(Function<BlockPos, Float> generator, int width, int height, int dxz, int dy, int offset) {
 		this.data = new float[width][width][height];
 		this.generator = generator;
 		this.height = (short) height;
 		this.width = (short) width;
 		this.dxz = (short) dxz;
 		this.dy = (short) dy;
+		this.offset = offset;
 	}
 	
 	public void update(int wx, int wz) {
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 		for (int x = 0; x < width; x++) {
-			pos.setX(wx + x * dxz);
+			pos.setX(wx + x * dxz + offset);
 			for (int z = 0; z < width; z++) {
-				pos.setZ(wz + z * dxz);
+				pos.setZ(wz + z * dxz + offset);
 				for (int y = 0; y < height; y++) {
-					pos.setY(y * dy);
+					pos.setY(y * dy + offset);
 					data[x][z][y] = generator.apply(pos);
 				}
 			}
@@ -38,6 +48,10 @@ public class InterpolationCell {
 	}
 	
 	public float get(int x, int y, int z) {
+		x += offset;
+		y += offset;
+		z += offset;
+		
 		int x1 = x / dxz;
 		int y1 = y / dy;
 		int z1 = z / dxz;

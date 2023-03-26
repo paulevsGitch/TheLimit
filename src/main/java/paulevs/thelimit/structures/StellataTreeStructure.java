@@ -24,9 +24,12 @@ public class StellataTreeStructure extends Structure {
 	
 	private void makeTrunk(Level level, int height, int x, int y, int z) {
 		BlockState log = TheLimitBlocks.STELLATA_LOG.getDefaultState();
+		BlockState top = TheLimitBlocks.STELLATA_BARK.getDefaultState();
+		height--;
 		for (int i = 0; i < height; i++) {
 			level.setBlockState(x, y + i, z, log);
 		}
+		level.setBlockState(x, y + height, z, log);
 	}
 	
 	private void makeRoots(Level level, Random random, int x, int y, int z) {
