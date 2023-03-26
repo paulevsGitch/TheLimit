@@ -70,8 +70,7 @@ dependencies {
 	modImplementation("net.glasslauncher:HowManyItems-Fabric-Unofficial:${project.howmanyitems_version}") {
 		transitive false
 	}
-	
-	compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+	modImplementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 processResources {

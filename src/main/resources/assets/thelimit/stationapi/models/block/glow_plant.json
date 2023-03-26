@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/cube_bottom_top",
+	"textures": {
+		"bottom": "thelimit:block/glaucolit",
+		"side": "thelimit:block/glow_plant_side",
+		"top": "thelimit:block/glow_plant_top"
+	}
+}

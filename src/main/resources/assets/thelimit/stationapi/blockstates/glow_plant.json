@@ -1,0 +1,14 @@
+{
+	"variants": {
+		"": [
+			{"model": "thelimit:block/glowing_plant_small_1"},
+			{"model": "thelimit:block/glowing_plant_small_2"},
+			{"model": "thelimit:block/glowing_plant_small_1", "y": 90},
+			{"model": "thelimit:block/glowing_plant_small_2", "y": 90},
+			{"model": "thelimit:block/glowing_plant_small_1", "y": 180},
+			{"model": "thelimit:block/glowing_plant_small_2", "y": 180},
+			{"model": "thelimit:block/glowing_plant_small_1", "y": 270},
+			{"model": "thelimit:block/glowing_plant_small_2", "y": 270}
+		]
+	}
+}

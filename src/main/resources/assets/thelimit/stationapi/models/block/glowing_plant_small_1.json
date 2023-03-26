@@ -1,0 +1,31 @@
+{
+	"credit": "Made by paulevs",
+	"textures": {
+		"0": "thelimit:block/glow_plant_small",
+		"particle": "thelimit:block/glow_plant_small"
+	},
+	"elements": [
+		{
+			"from": [7, 0, 7],
+			"to": [15, 8, 15],
+			"faces": {
+				"north": {"uv": [0, 8, 8, 16], "texture": "#0"},
+				"east": {"uv": [0, 8, 8, 16], "texture": "#0"},
+				"south": {"uv": [0, 8, 8, 16], "texture": "#0"},
+				"west": {"uv": [0, 8, 8, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [1, 0, 1],
+			"to": [6, 5, 6],
+			"faces": {
+				"north": {"uv": [9, 7, 14, 12], "texture": "#0"},
+				"east": {"uv": [9, 7, 14, 12], "texture": "#0"},
+				"south": {"uv": [9, 7, 14, 12], "texture": "#0"},
+				"west": {"uv": [9, 7, 14, 12], "texture": "#0"},
+				"up": {"uv": [9, 1, 14, 6], "texture": "#0"}
+			}
+		}
+	]
+}

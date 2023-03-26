@@ -2,7 +2,6 @@ package paulevs.thelimit.mixins.client;
 
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.level.Level;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -10,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.thelimit.TheLimit;
+import paulevs.thelimit.rendering.SkyRenderer;
 
 @Mixin(WorldRenderer.class)
 public class WorldRendererMixin {
@@ -24,23 +24,10 @@ public class WorldRendererMixin {
 	
 	@Inject(method = "renderSky", at = @At("HEAD"), cancellable = true)
 	public void thelimit_renderSky(float delta, CallbackInfo info) {
-		if (!isTheLimit) return;
-		info.cancel();
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glDepthMask(false);
-		GL11.glEnable(GL11.GL_FOG);
-		GL11.glColor3f(0, 0, 0);
-		
-		GL11.glCallList(this.field_1820);
-		
-		GL11.glPushMatrix();
-		GL11.glRotatef(180, 1, 0, 0);
-		GL11.glCallList(this.field_1820);
-		GL11.glPopMatrix();
-		
-		GL11.glDisable(GL11.GL_FOG);
-		GL11.glDepthMask(true);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		if (isTheLimit) {
+			SkyRenderer.render();
+			info.cancel();
+		}
 	}
 	
 	@Inject(method = "method_1546", at = @At("HEAD"))
