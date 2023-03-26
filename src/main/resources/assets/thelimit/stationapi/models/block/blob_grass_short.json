@@ -1,7 +1,0 @@
-{
-	"parent": "thelimit:block/cross_overlay",
-	"textures": {
-		"cross": "thelimit:block/blob_grass_short",
-		"overlay": "thelimit:block/blob_grass_short_e"
-	}
-}

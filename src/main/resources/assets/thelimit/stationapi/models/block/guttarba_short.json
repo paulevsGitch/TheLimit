@@ -1,0 +1,7 @@
+{
+	"parent": "thelimit:block/cross_overlay",
+	"textures": {
+		"cross": "thelimit:block/guttarba_short",
+		"overlay": "thelimit:block/guttarba_short_e"
+	}
+}

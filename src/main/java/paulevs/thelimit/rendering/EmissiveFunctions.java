@@ -31,8 +31,8 @@ public class EmissiveFunctions {
 			return MathHelper.clamp(value, 0, 1);
 		};
 		
-		FUNCTIONS.put(TheLimit.id("block/blob_grass_e"), grass);
-		FUNCTIONS.put(TheLimit.id("block/blob_grass_small_e"), grass);
+		FUNCTIONS.put(TheLimit.id("block/guttarba_e"), grass);
+		FUNCTIONS.put(TheLimit.id("block/guttarba_small_e"), grass);
 		
 		grass = pos -> {
 			Minecraft mc = (Minecraft) FabricLoader.getInstance().getGameInstance();
@@ -48,7 +48,7 @@ public class EmissiveFunctions {
 			return MathHelper.clamp(value, 0, 1);
 		};
 		
-		FUNCTIONS.put(TheLimit.id("block/blob_grass_tall_bottom_e"), grass);
-		FUNCTIONS.put(TheLimit.id("block/blob_grass_tall_top_e"), grass);
+		FUNCTIONS.put(TheLimit.id("block/guttarba_tall_bottom_e"), grass);
+		FUNCTIONS.put(TheLimit.id("block/guttarba_tall_top_e"), grass);
 	}
 }

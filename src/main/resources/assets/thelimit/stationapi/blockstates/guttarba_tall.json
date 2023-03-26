@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"part=bottom": { "model": "thelimit:block/guttarba_tall_bottom" },
+		"part=top": { "model": "thelimit:block/guttarba_tall_top" }
+	}
+}

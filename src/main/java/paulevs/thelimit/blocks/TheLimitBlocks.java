@@ -23,13 +23,14 @@ public class TheLimitBlocks {
 	public static final BlockBase STELLATA_BRANCH = make("stellata_branch", BranchBlock::new);
 	public static final BlockBase STELLATA_FLOWER = make("stellata_flower", StellataFlowerBlock::new);
 	
-	public static final BlockBase BLOB_GRASS_SHORT = make("blob_grass_short", PlantBlock::new);
-	public static final BlockBase BLOB_GRASS_NORMAL = make("blob_grass", PlantBlock::new);
-	public static final BlockBase BLOB_GRASS_TALL = make("blob_grass_tall", DoublePlantBlock::new);
+	public static final BlockBase GUTTARBA_SHORT = make("guttarba_short", PlantBlock::new);
+	public static final BlockBase GUTTARBA_NORMAL = make("guttarba_normal", PlantBlock::new);
+	public static final BlockBase GUTTARBA_TALL = make("guttarba_tall", DoublePlantBlock::new);
 	
 	private static BlockBase make(String name, Function<Identifier, BlockBase> constructor) {
 		Identifier id = TheLimit.id(name);
 		BlockBase block = constructor.apply(id);
+		block.setTranslationKey(name);
 		BLOCKS.add(block);
 		return block;
 	}
@@ -37,9 +38,13 @@ public class TheLimitBlocks {
 	private static BlockBase make(String name, BiFunction<Identifier, Material, BlockBase> constructor, Material material) {
 		Identifier id = TheLimit.id(name);
 		BlockBase block = constructor.apply(id, material);
+		//block.setTranslationKey(name);
 		BLOCKS.add(block);
 		return block;
 	}
 	
-	public static void init() {}
+	public static void init() {
+		BLOCKS.stream().map(BlockBase::getTranslationKey).forEach(System.out::println);
+		BLOCKS.stream().map(BlockBase::getTranslatedName).forEach(System.out::println);
+	}
 }

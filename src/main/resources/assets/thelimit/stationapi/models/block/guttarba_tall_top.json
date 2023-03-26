@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:block/cross",
 	"textures": {
-		"cross": "thelimit:block/blob_grass_tall_top_e"
+		"cross": "thelimit:block/guttarba_tall_top_e"
 	}
 }

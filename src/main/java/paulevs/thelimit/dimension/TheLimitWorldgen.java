@@ -86,7 +86,7 @@ public class TheLimitWorldgen implements LevelSource {
 			x = random.nextInt(16);
 			z = random.nextInt(16);
 			y = chunk.getHeight(x, z);
-			TheLimitStructures.BLOB_GRASS.generate(this.level, random, x | wx, y, z | wz);
+			TheLimitStructures.GUTTARBA.generate(this.level, random, x | wx, y, z | wz);
 		}
 	}
 	

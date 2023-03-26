@@ -29,7 +29,7 @@ public class StellataTreeStructure extends Structure {
 		for (int i = 0; i < height; i++) {
 			level.setBlockState(x, y + i, z, log);
 		}
-		level.setBlockState(x, y + height, z, log);
+		level.setBlockState(x, y + height, z, top);
 	}
 	
 	private void makeRoots(Level level, Random random, int x, int y, int z) {
