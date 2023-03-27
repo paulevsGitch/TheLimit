@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.util.maths.MathHelper;
+import net.modificationstation.stationapi.api.util.math.Vec3f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
 
@@ -13,33 +14,50 @@ import java.util.Random;
 
 public class SkyRenderer {
 	private static final boolean USE_SHADERS = FabricLoader.getInstance().isModLoaded("glsl");
+	private static final Vec3f FOG_COLOR = new Vec3f();
 	private static final int GRADIENT_1;
-	private static int stars;
+	private static final int GRADIENT_2;
+	private static int stars1;
+	private static int stars2;
 	private static int box;
-	private static int cylinder;
+	private static int skyGradient;
+	private static int skyStripes;
 	
 	public static void render() {
 		disable(GL11.GL_TEXTURE_2D);
 		disable(GL11.GL_FOG);
 		GL11.glDepthMask(false);
 		
-		GL11.glColor3f(1 * 0.1F, 0.5F * 0.1F, 1 * 0.1F);
+		GL11.glColor3f(FOG_COLOR.getX() * 0.1F, FOG_COLOR.getY() * 0.1F, FOG_COLOR.getZ() * 0.1F);
 		GL11.glCallList(box);
+		
+		GL11.glColor3f(1, 0.5F, 1);
+		GL11.glCallList(stars1);
+		
+		GL11.glColor3f(1, 0.8F, 1);
+		GL11.glCallList(stars2);
 		
 		enable(GL11.GL_TEXTURE_2D);
 		enable(GL11.GL_BLEND);
+		
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.0F);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, GRADIENT_1);
 		GL11.glColor3f(1, 0.5F, 1);
-		GL11.glCallList(cylinder);
-		disable(GL11.GL_TEXTURE_2D);
-		disable(GL11.GL_BLEND);
+		GL11.glColor3f(FOG_COLOR.getX(), FOG_COLOR.getY(), FOG_COLOR.getZ());
+		GL11.glCallList(skyGradient);
 		
-		GL11.glColor3f(1, 0.5F, 1);
-		GL11.glCallList(stars);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, GRADIENT_2);
+		GL11.glColor4f(FOG_COLOR.getX() * 1.2F, FOG_COLOR.getY() * 1.2F, FOG_COLOR.getZ() * 1.2F, 0.1F);
+		GL11.glCallList(skyStripes);
+		
+		disable(GL11.GL_BLEND);
 		
 		GL11.glDepthMask(true);
 		enable(GL11.GL_TEXTURE_2D);
+	}
+	
+	public static void setFogColor(float r, float g, float b) {
+		FOG_COLOR.set(r, g, b);
 	}
 	
 	private static void enable(int target) {
@@ -52,23 +70,23 @@ public class SkyRenderer {
 		else GL11.glDisable(target);
 	}
 	
-	private static void makeStars() {
+	private static int makeStars(int count, float size, int seed) {
 		Tessellator tessellator = Tessellator.INSTANCE;
 		
-		Random random = new Random(0);
+		Random random = new Random(seed);
 		float pi2 = (float) (Math.PI * 2);
 		
-		stars = GL11.glGenLists(1);
-		GL11.glNewList(stars, GL11.GL_COMPILE);
+		int list = GL11.glGenLists(1);
+		GL11.glNewList(list, GL11.GL_COMPILE);
 		
 		tessellator.start();
 		
-		for (short i = 0; i < 1500; ++i) {
+		for (short i = 0; i < count; ++i) {
 			float preX = random.nextFloat() - 0.5F;
 			float preY = random.nextFloat() - 0.5F;
 			float preZ = random.nextFloat() - 0.5F;
 			
-			float scale = 0.125F + random.nextFloat() * 0.125F;
+			float scale = size * (1 + random.nextFloat());
 			float dist = preX * preX + preY * preY + preZ * preZ;
 			if (dist < 0.01F) continue;
 			
@@ -107,6 +125,8 @@ public class SkyRenderer {
 		
 		tessellator.draw();
 		GL11.glEndList();
+		
+		return list;
 	}
 	
 	private static void makeBox() {
@@ -150,11 +170,11 @@ public class SkyRenderer {
 		GL11.glEndList();
 	}
 	
-	private static void makeCylinder() {
+	private static void makeSkyGradient() {
 		float pi2 = (float) (Math.PI * 2);
 		
-		cylinder = GL11.glGenLists(1);
-		GL11.glNewList(cylinder, GL11.GL_COMPILE);
+		skyGradient = GL11.glGenLists(1);
+		GL11.glNewList(skyGradient, GL11.GL_COMPILE);
 		Tessellator tessellator = Tessellator.INSTANCE;
 		tessellator.start();
 		
@@ -180,16 +200,55 @@ public class SkyRenderer {
 		GL11.glEndList();
 	}
 	
+	private static void makeSkyStripes() {
+		float pi2 = (float) (Math.PI * 2);
+		Random random = new Random(0);
+		
+		skyStripes = GL11.glGenLists(1);
+		GL11.glNewList(skyStripes, GL11.GL_COMPILE);
+		Tessellator tessellator = Tessellator.INSTANCE;
+		tessellator.start();
+		
+		for (short i = 0; i < 200; i++) {
+			float angle = random.nextFloat() * pi2;
+			float height = random.nextFloat() * 25 + 25;
+			float width = random.nextFloat() * 0.02F + 0.05F;
+			
+			float sin1 = MathHelper.sin(angle) * 100;
+			float cos1 = MathHelper.cos(angle) * 100;
+			float sin2 = MathHelper.sin(angle + width) * 100;
+			float cos2 = MathHelper.cos(angle + width) * 100;
+			
+			tessellator.vertex(sin1, -height, cos1, 0, 0);
+			tessellator.vertex(sin1,  height, cos1, 0, 1);
+			tessellator.vertex(sin2,  height, cos2, 1, 1);
+			tessellator.vertex(sin2, -height, cos2, 1, 0);
+		}
+		
+		tessellator.draw();
+		GL11.glEndList();
+	}
+	
 	static {
-		makeStars();
+		stars1 = makeStars(1500, 0.125F, 0);
+		stars2 = makeStars(800, 0.1F, 1);
 		makeBox();
-		makeCylinder();
+		makeSkyGradient();
+		makeSkyStripes();
 		
 		TextureManager textureManager = ((Minecraft) FabricLoader.getInstance().getGameInstance()).textureManager;
 		GRADIENT_1 = textureManager.getTextureId("/assets/thelimit/stationapi/textures/environment/gradient_1.png");
+		GRADIENT_2 = textureManager.getTextureId("/assets/thelimit/stationapi/textures/environment/gradient_2.png");
 		
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, GRADIENT_1);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_CLAMP);
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL14.GL_GENERATE_MIPMAP, GL11.GL_FALSE);
+		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, GRADIENT_2);
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_CLAMP);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_CLAMP);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
