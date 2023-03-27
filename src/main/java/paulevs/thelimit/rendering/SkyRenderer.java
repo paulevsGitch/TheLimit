@@ -17,11 +17,11 @@ public class SkyRenderer {
 	private static final Vec3f FOG_COLOR = new Vec3f();
 	private static final int GRADIENT_1;
 	private static final int GRADIENT_2;
-	private static int stars1;
-	private static int stars2;
-	private static int box;
-	private static int skyGradient;
-	private static int skyStripes;
+	private static final int STARS_1;
+	private static final int STARS_2;
+	private static final int SKY_BACK;
+	private static final int SKY_GRADIENT;
+	private static final int SKY_STRIPES;
 	
 	public static void render() {
 		disable(GL11.GL_TEXTURE_2D);
@@ -29,13 +29,13 @@ public class SkyRenderer {
 		GL11.glDepthMask(false);
 		
 		GL11.glColor3f(FOG_COLOR.getX() * 0.1F, FOG_COLOR.getY() * 0.1F, FOG_COLOR.getZ() * 0.1F);
-		GL11.glCallList(box);
+		GL11.glCallList(SKY_BACK);
 		
 		GL11.glColor3f(1, 0.5F, 1);
-		GL11.glCallList(stars1);
+		GL11.glCallList(STARS_1);
 		
 		GL11.glColor3f(1, 0.8F, 1);
-		GL11.glCallList(stars2);
+		GL11.glCallList(STARS_2);
 		
 		enable(GL11.GL_TEXTURE_2D);
 		enable(GL11.GL_BLEND);
@@ -44,11 +44,11 @@ public class SkyRenderer {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, GRADIENT_1);
 		GL11.glColor3f(1, 0.5F, 1);
 		GL11.glColor3f(FOG_COLOR.getX(), FOG_COLOR.getY(), FOG_COLOR.getZ());
-		GL11.glCallList(skyGradient);
+		GL11.glCallList(SKY_GRADIENT);
 		
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, GRADIENT_2);
 		GL11.glColor4f(FOG_COLOR.getX() * 1.2F, FOG_COLOR.getY() * 1.2F, FOG_COLOR.getZ() * 1.2F, 0.1F);
-		GL11.glCallList(skyStripes);
+		GL11.glCallList(SKY_STRIPES);
 		
 		disable(GL11.GL_BLEND);
 		
@@ -129,9 +129,9 @@ public class SkyRenderer {
 		return list;
 	}
 	
-	private static void makeBox() {
-		box = GL11.glGenLists(1);
-		GL11.glNewList(box, GL11.GL_COMPILE);
+	private static int makeBox() {
+		int list = GL11.glGenLists(1);
+		GL11.glNewList(list, GL11.GL_COMPILE);
 		
 		Tessellator tessellator = Tessellator.INSTANCE;
 		tessellator.start();
@@ -168,13 +168,15 @@ public class SkyRenderer {
 		
 		tessellator.draw();
 		GL11.glEndList();
+		
+		return list;
 	}
 	
-	private static void makeSkyGradient() {
+	private static int makeSkyGradient() {
 		float pi2 = (float) (Math.PI * 2);
 		
-		skyGradient = GL11.glGenLists(1);
-		GL11.glNewList(skyGradient, GL11.GL_COMPILE);
+		int list = GL11.glGenLists(1);
+		GL11.glNewList(list, GL11.GL_COMPILE);
 		Tessellator tessellator = Tessellator.INSTANCE;
 		tessellator.start();
 		
@@ -198,14 +200,16 @@ public class SkyRenderer {
 		
 		tessellator.draw();
 		GL11.glEndList();
+		
+		return list;
 	}
 	
-	private static void makeSkyStripes() {
+	private static int makeSkyStripes() {
 		float pi2 = (float) (Math.PI * 2);
 		Random random = new Random(0);
 		
-		skyStripes = GL11.glGenLists(1);
-		GL11.glNewList(skyStripes, GL11.GL_COMPILE);
+		int list = GL11.glGenLists(1);
+		GL11.glNewList(list, GL11.GL_COMPILE);
 		Tessellator tessellator = Tessellator.INSTANCE;
 		tessellator.start();
 		
@@ -227,14 +231,16 @@ public class SkyRenderer {
 		
 		tessellator.draw();
 		GL11.glEndList();
+		
+		return list;
 	}
 	
 	static {
-		stars1 = makeStars(1500, 0.125F, 0);
-		stars2 = makeStars(800, 0.1F, 1);
-		makeBox();
-		makeSkyGradient();
-		makeSkyStripes();
+		STARS_1 = makeStars(1500, 0.125F, 0);
+		STARS_2 = makeStars(800, 0.1F, 1);
+		SKY_BACK = makeBox();
+		SKY_GRADIENT = makeSkyGradient();
+		SKY_STRIPES = makeSkyStripes();
 		
 		TextureManager textureManager = ((Minecraft) FabricLoader.getInstance().getGameInstance()).textureManager;
 		GRADIENT_1 = textureManager.getTextureId("/assets/thelimit/stationapi/textures/environment/gradient_1.png");

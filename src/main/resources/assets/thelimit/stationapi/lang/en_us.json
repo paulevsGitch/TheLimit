@@ -1,0 +1,15 @@
+{
+	"tile.glaucolit.name": "Glaucolit",
+	"tile.vitilit.name": "Vitilit",
+	"tile.hyphum.name": "Hyphum",
+	
+	"tile.stellata_log.name": "Stellata Log",
+	"tile.stellata_bark.name": "Stellata Bark",
+	"tile.stellata_stem.name": "Stellata Stem",
+	"tile.stellata_branch.name": "Stellata Branch",
+	"tile.stellata_flower.name": "Stellata Flower",
+	
+	"tile.guttarba_short.name": "Guttarba Short",
+	"tile.guttarba_normal.name": "Guttarba Normal",
+	"tile.guttarba_tall.name": "Guttarba Tall"
+}

@@ -1,11 +1,17 @@
 package paulevs.thelimit.blocks;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import net.minecraft.block.BlockBase;
+import net.minecraft.client.resource.language.TranslationStorage;
 import net.modificationstation.stationapi.api.registry.Identifier;
+import net.modificationstation.stationapi.mixin.lang.TranslationStorageAccessor;
 import paulevs.thelimit.TheLimit;
+import paulevs.thelimit.config.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.function.Function;
 
 public class TheLimitBlocks {
@@ -38,7 +44,13 @@ public class TheLimitBlocks {
 	}
 	
 	public static void init() {
-		BLOCKS.stream().map(BlockBase::getTranslationKey).forEach(System.out::println);
-		BLOCKS.stream().map(BlockBase::getTranslatedName).forEach(System.out::println);
+		Properties translations = ((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations();
+		JsonObject translation = JsonUtil.readJson("/assets/thelimit/stationapi/lang/en_us.json");
+		BLOCKS.forEach(block -> {
+			String key = block.getTranslationKey();
+			JsonElement element = translation.get(key);
+			if (element == null) return;
+			translations.put(key, element.getAsString());
+		});
 	}
 }

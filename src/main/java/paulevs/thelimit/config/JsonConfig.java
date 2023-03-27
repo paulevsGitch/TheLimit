@@ -1,37 +1,27 @@
 package paulevs.thelimit.config;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.google.gson.stream.JsonWriter;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.function.Supplier;
 
 public class JsonConfig {
-	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-	
 	private final File file;
-	
 	private boolean requireSave;
 	private final JsonObject json;
 	
 	public JsonConfig(String name) {
 		this.file = new File(FabricLoader.getInstance().getConfigDir().toString() + "/thelimit/" + name + ".json");
 		this.requireSave = !file.exists();
-		this.json = readJson(file);
+		this.json = JsonUtil.readJson(file);
 	}
 	
 	public void save() {
 		if (!requireSave) return;
-		writeJson(file, json);
+		JsonUtil.writeJson(file, json);
 	}
 	
 	private JsonElement get(String path, Supplier<JsonElement> def) {
@@ -78,38 +68,5 @@ public class JsonConfig {
 	
 	public void setFloat(String path, float value) {
 		set(path, new JsonPrimitive(value));
-	}
-	
-	private JsonObject readJson(File file) {
-		if (!file.exists()) return new JsonObject();
-		JsonObject result;
-		try {
-			FileInputStream stream = new FileInputStream(file);
-			InputStreamReader reader = new InputStreamReader(stream);
-			result = GSON.fromJson(reader, JsonObject.class);
-			reader.close();
-			stream.close();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-			result = new JsonObject();
-		}
-		return result;
-	}
-	
-	private void writeJson(File file, JsonObject obj) {
-		file.getParentFile().mkdirs();
-		try {
-			FileWriter fileWriter = new FileWriter(file);
-			JsonWriter jsonWriter = GSON.newJsonWriter(fileWriter);
-			jsonWriter.setIndent("\t");
-			GSON.toJson(obj, jsonWriter);
-			jsonWriter.flush();
-			jsonWriter.close();
-			fileWriter.close();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }
