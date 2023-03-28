@@ -6,10 +6,13 @@
 	"plugin": "paulevs.thelimit.mixins.client.ClientMixinPlugin",
 	"client": [
 		"LightingCalculatorImplMixin",
+		"SpriteAtlasTextureMixin",
 		"JsonUnbakedModelMixin",
 		"WorldRendererMixin",
+		"BlockRendererMixin",
 		"GameRendererMixin",
 		"BakedQuadMixin",
+		"AtlasAccessor",
 		"ShadersMixin"
 	],
 	"injectors": {

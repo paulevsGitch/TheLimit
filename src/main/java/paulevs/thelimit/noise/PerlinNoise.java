@@ -1,5 +1,6 @@
 package paulevs.thelimit.noise;
 
+import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.api.util.math.Vec3f;
 
@@ -18,6 +19,10 @@ public class PerlinNoise {
 	
 	public PerlinNoise(int seed) {
 		this.seed = seed;
+	}
+	
+	public float get(BlockPos pos, double scale) {
+		return get(pos.getX() * scale, pos.getY() * scale, pos.getZ() * scale);
 	}
 	
 	public float get(double x, double y, double z) {

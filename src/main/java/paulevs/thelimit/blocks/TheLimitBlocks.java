@@ -1,17 +1,11 @@
 package paulevs.thelimit.blocks;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import net.minecraft.block.BlockBase;
-import net.minecraft.client.resource.language.TranslationStorage;
 import net.modificationstation.stationapi.api.registry.Identifier;
-import net.modificationstation.stationapi.mixin.lang.TranslationStorageAccessor;
 import paulevs.thelimit.TheLimit;
-import paulevs.thelimit.config.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.function.Function;
 
 public class TheLimitBlocks {
@@ -35,22 +29,22 @@ public class TheLimitBlocks {
 	
 	public static final BlockBase GLOW_PLANT = make("glow_plant", GlowingPlant::new);
 	
-	private static BlockBase make(String name, Function<Identifier, BlockBase> constructor) {
+	public static final BlockBase MOSS = make("moss", MossBlock::new);
+	
+	//public static final FlowingVoidFluid VOID_FLUID_FLOWING = make("void_fluid_flowing", FlowingVoidFluid::new);
+	//public static final StillVoidFluid VOID_FLUID_STILL = make("void_fluid_still", StillVoidFluid::new);
+	public static final VoidFluidBlock VOID_FLUID = make("void_fluid", VoidFluidBlock::new);
+	
+	private static <T extends BlockBase> T make(String name, Function<Identifier, T> constructor) {
 		Identifier id = TheLimit.id(name);
-		BlockBase block = constructor.apply(id);
-		block.setTranslationKey(name);
+		T block = constructor.apply(id);
+		block.setTranslationKey(id.toString());
 		BLOCKS.add(block);
 		return block;
 	}
 	
 	public static void init() {
-		Properties translations = ((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations();
-		JsonObject translation = JsonUtil.readJson("/assets/thelimit/stationapi/lang/en_us.json");
-		BLOCKS.forEach(block -> {
-			String key = block.getTranslationKey();
-			JsonElement element = translation.get(key);
-			if (element == null) return;
-			translations.put(key, element.getAsString());
-		});
+		//VOID_FLUID_FLOWING.setStillFluid(VOID_FLUID_STILL::getDefaultState);
+		//VOID_FLUID_STILL.setFlowingFluid(VOID_FLUID_FLOWING::getDefaultState);
 	}
 }

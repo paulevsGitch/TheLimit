@@ -1,0 +1,7 @@
+{
+	"parent": "thelimit:block/plane_overlay",
+	"textures": {
+		"texture": "thelimit:block/moss_1",
+		"overlay": "thelimit:block/moss_1_e"
+	}
+}

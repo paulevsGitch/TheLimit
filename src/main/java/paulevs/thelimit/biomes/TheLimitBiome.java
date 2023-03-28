@@ -4,7 +4,7 @@ import net.minecraft.level.Level;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.chunk.Chunk;
 import net.modificationstation.stationapi.api.block.BlockState;
-import paulevs.thelimit.structures.StructurePlacer;
+import paulevs.thelimit.structures.placers.StructurePlacer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ public abstract class TheLimitBiome extends Biome {
 	
 	public void populate(Level level, Chunk chunk, Random random, int wx, int wz) {
 		placers.forEach(placer -> placer.place(level, chunk, random, wx, wz));
+		//placers.stream().parallel().forEach(placer -> placer.place(level, chunk, random, wx, wz));
 	}
 	
 	public abstract BlockState getGround(Level level, Random random, int x, int y, int z);

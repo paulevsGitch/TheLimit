@@ -42,12 +42,15 @@ public class IslandLayer {
 		random.setSeed(seed);
 		
 		float scale = MathHelper.lerp(random.nextFloat(), 1F, 1.5F);
+		float heightScale = 1;//MathHelper.lerp(random.nextFloat(), 1F, 3F);
 		float density = coverage - islandNoise.get(px, pz) * scale;
 		
-		float height = terrainNoise.get(pos.getX() * 0.01, pos.getZ() * 0.01) * 20 - 10;
-		height += terrainNoise.get(pos.getX() * 0.03, pos.getZ() * 0.03) * 20 - 10;
+		float height = 0;//terrainNoise.get(pos.getX() * 0.01, pos.getZ() * 0.01) * 20 - 10;
+		//height += terrainNoise.get(pos.getX() * 0.03, pos.getZ() * 0.03) * 20 - 10;
 		
-		density += getGradient(pos.getY() + height, -1 * scale, 0, -6 * scale);
+		density += getGradient(pos.getY() + height, -1 * scale, 0, -6 * scale * heightScale);
+		//density += terrainNoise.get(pos.getX() * 0.03, pos.getZ() * 0.03) * 0.1F;
+		density += terrainNoise.get(pos.getX() * 0.1, pos.getZ() * 0.1) * 0.3F - 0.1F;
 		
 		return density;
 	}

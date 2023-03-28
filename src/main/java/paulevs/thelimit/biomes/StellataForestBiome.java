@@ -15,6 +15,7 @@ public class StellataForestBiome extends TheLimitBiome {
 		addStructure(TheLimitStructures.STELLATA_TREE_SMALL_PLACER);
 		addStructure(TheLimitStructures.GUTTARBA_PLACER);
 		addStructure(TheLimitStructures.GLOW_PLANT_PLACER);
+		addStructure(TheLimitStructures.MOSS_PLACER);
 	}
 	
 	@Override

@@ -1,0 +1,6 @@
+{
+	"parent": "thelimit:block/plane",
+	"textures": {
+		"texture": "thelimit:block/moss_3"
+	}
+}

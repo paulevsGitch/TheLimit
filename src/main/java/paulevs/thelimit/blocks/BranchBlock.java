@@ -56,37 +56,6 @@ public class BranchBlock extends TemplateBlockBase {
 		return false;
 	}
 	
-	/*@Override
-	public void updateBoundingBox(BlockView view, int x, int y, int z) {
-		if (view instanceof Level) {
-			BlockState state = ((Level) view).getBlockState(x, y, z);
-			if (state.isOf(this)) {
-				setBoundingBox(state);
-				return;
-			}
-		}
-		this.setBoundingBox(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
-	}
-	
-	@Override
-	public void doesBoxCollide(Level level, int x, int y, int z, Box box, ArrayList list) {
-		BlockState state = level.getBlockState(x, y, z);
-		if (state.isOf(this)) {
-			setBoundingBox(state);
-		}
-		super.doesBoxCollide(level, x, y, z, box, list);
-		this.setBoundingBox(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
-	}
-	
-	private void setBoundingBox(BlockState state) {
-		Axis axis = state.get(TLBlockProperties.AXIS);
-		switch (axis) {
-			case X -> this.setBoundingBox(0.0F, 0.25F, 0.25F, 1.0F, 0.75F, 0.75F);
-			case Y -> this.setBoundingBox(0.25F, 0.0F, 0.25F, 0.75F, 1.0F, 0.75F);
-			case Z -> this.setBoundingBox(0.25F, 0.25F, 0.0F, 0.75F, 0.75F, 1.0F);
-		}
-	}*/
-	
 	private BlockState getFacingState(Level level, int x, int y, int z) {
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 		BlockState self = getDefaultState();

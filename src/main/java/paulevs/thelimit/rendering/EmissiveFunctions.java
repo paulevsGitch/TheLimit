@@ -26,7 +26,7 @@ public class EmissiveFunctions {
 	static {
 		PerlinNoise noise = new PerlinNoise(0);
 		Function<BlockPos, Float> grass = pos -> {
-			float value = noise.get(pos.getX() * 0.2, pos.getY() * 0.2, pos.getZ() * 0.2) * 4F - 2F;
+			float value = noise.get(pos, 0.2) * 4F - 2F;
 			value += (MathHelper.hashCode(pos.getX(), pos.getY(), pos.getZ()) & 15) / 32F;
 			return MathHelper.clamp(value, 0, 1);
 		};

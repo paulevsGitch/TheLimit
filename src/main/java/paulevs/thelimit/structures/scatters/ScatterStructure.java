@@ -1,4 +1,4 @@
-package paulevs.thelimit.structures;
+package paulevs.thelimit.structures.scatters;
 
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
@@ -9,9 +9,9 @@ import paulevs.thelimit.TheLimit;
 import java.util.Random;
 
 public abstract class ScatterStructure extends Structure {
-	private final int radius2;
+	protected final int radius2;
 	protected final int radius;
-	private final int count;
+	protected final int count;
 	
 	protected ScatterStructure(int radius, int count) {
 		this.radius2 = radius * 2 + 1;
@@ -30,7 +30,7 @@ public abstract class ScatterStructure extends Structure {
 			BlockState state = level.getBlockState(pos.getX(), pos.getY() - 1, pos.getZ());
 			for (int j = 0; j < 11; j++) {
 				BlockState below = level.getBlockState(pos.getX(), pos.getY() - 1, pos.getZ());
-				if (TheLimit.isReplaceable(state) && !TheLimit.isReplaceable(below)) {
+				if (state.isAir() && !TheLimit.isReplaceable(below)) {
 					place(level, random, pos, center);
 					break;
 				}

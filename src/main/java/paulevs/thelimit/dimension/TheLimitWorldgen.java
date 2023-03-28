@@ -1,5 +1,6 @@
 package paulevs.thelimit.dimension;
 
+import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.source.LevelSource;
@@ -12,11 +13,14 @@ import net.modificationstation.stationapi.impl.level.chunk.StationFlatteningChun
 import paulevs.thelimit.biomes.TheLimitBiomes;
 import paulevs.thelimit.blocks.TheLimitBlocks;
 import paulevs.thelimit.noise.PerlinNoise;
+import paulevs.thelimit.structures.TheLimitStructures;
 
 import java.util.Random;
 import java.util.stream.IntStream;
 
 public class TheLimitWorldgen implements LevelSource {
+	public static TheLimitWorldgen instance;
+	
 	private final IslandLayer layer1;
 	private final IslandLayer layer2;
 	private final IslandLayer layer3;
@@ -33,6 +37,8 @@ public class TheLimitWorldgen implements LevelSource {
 		layer1 = new IslandLayer(random.nextInt(), 120, 200, 1.0F);
 		layer2 = new IslandLayer(random.nextInt(), 80, 200, 0.75F);
 		layer3 = new IslandLayer(random.nextInt(), 160, 200, 0.75F);
+		TheLimitStructures.updateDensity(level.getSeed());
+		instance = this;
 	}
 	
 	@Override
@@ -52,11 +58,18 @@ public class TheLimitWorldgen implements LevelSource {
 	
 	@Override
 	public void decorate(LevelSource level, int cx, int cz) {
+		/*if (!level.isChunkLoaded(cx - 1, cz)) return;
+		if (!level.isChunkLoaded(cx + 1, cz)) return;
+		if (!level.isChunkLoaded(cx, cz - 1)) return;
+		if (!level.isChunkLoaded(cx, cz + 1)) return;*/
+		
 		final int wx = cx << 4;
 		final int wz = cz << 4;
-		Chunk chunk = level.getChunk(cx, cz);
+		Chunk chunk = this.level.getChunkFromCache(cx, cz);
 		
 		random.setSeed(MathHelper.hashCode(cx, (int) this.level.getSeed(), cz));
+		
+		TheLimitStructures.SMALL_ISLAND_PLACER.place(this.level, chunk, random, wx, wz);
 		
 		for (short i = 0; i < 256; i++) {
 			int px = i & 15;
@@ -123,6 +136,12 @@ public class TheLimitWorldgen implements LevelSource {
 		});
 		
 		chunk.generateHeightmap();
+		
+		// Custom unpopulated chunk mark
+		// Used to solve cascade worldgen bug with custom populator
+		//sections[0].setBlockState(0, 0, 0, BlockBase.BEDROCK.getDefaultState());
+		//chunk.decorated = true;
+		
 		return chunk;
 	}
 	

@@ -1,13 +1,15 @@
-package paulevs.thelimit.structures;
+package paulevs.thelimit.structures.scatters;
 
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
+import net.minecraft.level.chunk.Chunk;
+import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 
 import java.util.Random;
 
 public class SimpleScatter extends ScatterStructure {
-	private final BlockBase block;
+	protected final BlockBase block;
 	
 	public SimpleScatter(int radius, int count, BlockBase block) {
 		super(radius, count);
@@ -20,4 +22,12 @@ public class SimpleScatter extends ScatterStructure {
 			level.setBlockState(pos.getX(), pos.getY(), pos.getZ(), block.getDefaultState());
 		}
 	}
+	
+	/*protected BlockState getBlockState(Level level, int x, int y, int z) {
+		int cx = x >> 4;
+		int cz = z >> 4;
+		if (level.getChunkFromCache())
+		Chunk chunk = level.getChunkFromCache(x >> 4, z >> 4);
+		return chunk.getBlockState(x, y & 15, z);
+	}*/
 }

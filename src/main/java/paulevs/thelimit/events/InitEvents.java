@@ -1,8 +1,6 @@
 package paulevs.thelimit.events;
 
-import com.google.gson.JsonObject;
 import net.mine_diver.unsafeevents.listener.EventListener;
-import net.minecraft.client.resource.language.TranslationStorage;
 import net.minecraft.level.dimension.Dimension;
 import net.modificationstation.stationapi.api.event.mod.PostInitEvent;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
@@ -10,11 +8,9 @@ import net.modificationstation.stationapi.api.event.registry.DimensionRegistryEv
 import net.modificationstation.stationapi.api.registry.DimensionContainer;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
-import net.modificationstation.stationapi.mixin.lang.TranslationStorageAccessor;
 import paulevs.thelimit.TheLimit;
 import paulevs.thelimit.blocks.TheLimitBlocks;
 import paulevs.thelimit.config.Configs;
-import paulevs.thelimit.config.JsonUtil;
 import paulevs.thelimit.dimension.InterpolationCell;
 import paulevs.thelimit.dimension.IslandLayer;
 import paulevs.thelimit.dimension.TheLimitDimension;
@@ -25,7 +21,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.image.BufferedImage;
-import java.util.Properties;
 import java.util.Random;
 
 public class InitEvents {
@@ -42,14 +37,25 @@ public class InitEvents {
 	@EventListener
 	public void postInit(PostInitEvent event) {
 		Configs.saveAll();
-		Properties translations = ((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations();
+		//TheLimitBlocks.VOID_FLUID.initialised = true;
+		//showIslands2();
+		/*Properties translations = ((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations();
 		JsonObject translation = JsonUtil.readJson("/assets/thelimit/stationapi/lang/en_us.json");
 		translation.entrySet().forEach(entry -> {
 			String key = entry.getKey();
 			String value = entry.getValue().getAsString();
 			translations.put(key, value);
-		});
+		});*/
+		
+		//Atlases.getTerrain().idToTex.keySet().forEach(System.out::println);
 	}
+	
+	/*@EventListener
+	public void textureInit(ResourcesReloadEvent event) {
+		ExpandableAtlas atlas = Atlases.getTerrain();
+		if (atlas == null) return;
+		atlas.idToTex.keySet().forEach(System.out::println);
+	}*/
 	
 	final PerlinNoise terrainNoise = new PerlinNoise(0);
 	final VoronoiNoise islandNoise = new VoronoiNoise(0);
@@ -177,9 +183,9 @@ public class InitEvents {
 		frame.setVisible(true);
 	}
 	
-	IslandLayer layer = new IslandLayer(0, 120, 200, 1.0F);
-	IslandLayer layer2 = new IslandLayer(1, 80, 200, 0.75F);
-	IslandLayer layer3 = new IslandLayer(2, 160, 200, 0.75F);
+	IslandLayer layer = new IslandLayer(random.nextInt(), 120, 200, 1.0F);
+	IslandLayer layer2 = new IslandLayer(random.nextInt(), 80, 200, 0.75F);
+	IslandLayer layer3 = new IslandLayer(random.nextInt(), 160, 200, 0.75F);
 	
 	private float getDensity(BlockPos pos) {
 		float density = layer.getDensity(pos);

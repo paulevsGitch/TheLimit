@@ -1,0 +1,52 @@
+{
+	"multipart": [
+		{
+			"apply": [
+				{ "model": "thelimit:block/moss_1", "x": 90, "y": 180 },
+				{ "model": "thelimit:block/moss_2", "x": 90, "y": 180 },
+				{ "model": "thelimit:block/moss_3", "x": 90, "y": 180 }
+			],
+			"when": { "north": "true" }
+		},
+		{
+			"apply": [
+				{ "model": "thelimit:block/moss_3", "x": 90 },
+				{ "model": "thelimit:block/moss_1", "x": 90 },
+				{ "model": "thelimit:block/moss_2", "x": 90 }
+			],
+			"when": { "south": "true" }
+		},
+		{
+			"apply": [
+				{ "model": "thelimit:block/moss_3", "x": 90, "y": 270 },
+				{ "model": "thelimit:block/moss_2", "x": 90, "y": 270 },
+				{ "model": "thelimit:block/moss_1", "x": 90, "y": 270 }
+			],
+			"when": { "east": "true" }
+		},
+		{
+			"apply": [
+				{ "model": "thelimit:block/moss_1", "x": 90, "y": 90 },
+				{ "model": "thelimit:block/moss_2", "x": 90, "y": 90 },
+				{ "model": "thelimit:block/moss_3", "x": 90, "y": 90 }
+			],
+			"when": { "west": "true" }
+		},
+		{
+			"apply": [
+				{ "model": "thelimit:block/moss_3", "x": 180 },
+				{ "model": "thelimit:block/moss_1", "x": 180 },
+				{ "model": "thelimit:block/moss_2", "x": 180 }
+			],
+			"when": { "up": "true" }
+		},
+		{
+			"apply": [
+				{ "model": "thelimit:block/moss_3" },
+				{ "model": "thelimit:block/moss_2" },
+				{ "model": "thelimit:block/moss_1" }
+			],
+			"when": { "down": "true" }
+		}
+	]
+}

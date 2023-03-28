@@ -5,6 +5,8 @@
 	"compatibilityLevel": "JAVA_17",
 	"plugin": "paulevs.thelimit.mixins.common.CommonMixinPlugin",
 	"mixins": [
+		"StationFlatteningChunkMixin",
+		"ServerChunkCacheMixin",
 		"HMIUtilsMixin",
 		"BlockMixin",
 		"LevelMixin"
