@@ -1,6 +1,5 @@
 package paulevs.thelimit.dimension;
 
-import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.source.LevelSource;

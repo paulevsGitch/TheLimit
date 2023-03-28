@@ -1,4 +1,4 @@
-package paulevs.thelimit.mixins.client;
+package paulevs.thelimit.mixins.plugins;
 
 import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;

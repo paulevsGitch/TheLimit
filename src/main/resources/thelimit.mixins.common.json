@@ -3,7 +3,7 @@
 	"minVersion": "0.8",
 	"package": "paulevs.thelimit.mixins.common",
 	"compatibilityLevel": "JAVA_17",
-	"plugin": "paulevs.thelimit.mixins.common.CommonMixinPlugin",
+	"plugin": "paulevs.thelimit.mixins.plugins.CommonMixinPlugin",
 	"mixins": [
 		"StationFlatteningChunkMixin",
 		"ServerChunkCacheMixin",

@@ -2,7 +2,6 @@ package paulevs.thelimit.structures.scatters;
 
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;
-import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 
 import java.util.Random;

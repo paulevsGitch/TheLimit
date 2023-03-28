@@ -3,9 +3,10 @@
 	"minVersion": "0.8",
 	"package": "paulevs.thelimit.mixins.client",
 	"compatibilityLevel": "JAVA_17",
-	"plugin": "paulevs.thelimit.mixins.client.ClientMixinPlugin",
+	"plugin": "paulevs.thelimit.mixins.plugins.ClientMixinPlugin",
 	"client": [
 		"LightingCalculatorImplMixin",
+		"ArsenicBlockRendererMixin",
 		"SpriteAtlasTextureMixin",
 		"JsonUnbakedModelMixin",
 		"WorldRendererMixin",
@@ -13,7 +14,8 @@
 		"GameRendererMixin",
 		"BakedQuadMixin",
 		"AtlasAccessor",
-		"ShadersMixin"
+		"ShadersMixin",
+		"SpriteMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

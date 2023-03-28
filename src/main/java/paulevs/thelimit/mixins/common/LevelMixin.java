@@ -4,20 +4,15 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.level.Level;
 import net.minecraft.level.LevelProperties;
-import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.dimension.Dimension;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import paulevs.thelimit.TheLimit;
-import paulevs.thelimit.dimension.TheLimitWorldgen;
 
 import java.util.Random;
 
