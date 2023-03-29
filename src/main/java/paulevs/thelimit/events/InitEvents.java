@@ -11,16 +11,21 @@ import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.thelimit.TheLimit;
 import paulevs.thelimit.blocks.TheLimitBlocks;
 import paulevs.thelimit.config.Configs;
-import paulevs.thelimit.dimension.InterpolationCell;
-import paulevs.thelimit.dimension.IslandLayer;
-import paulevs.thelimit.dimension.TheLimitDimension;
-import paulevs.thelimit.noise.PerlinNoise;
-import paulevs.thelimit.noise.VoronoiNoise;
+import paulevs.thelimit.world.biomes.TheLimitBiome;
+import paulevs.thelimit.world.biomes.TheLimitBiomes;
+import paulevs.thelimit.world.dimension.BiomeMap;
+import paulevs.thelimit.world.dimension.InterpolationCell;
+import paulevs.thelimit.world.dimension.IslandLayer;
+import paulevs.thelimit.world.dimension.TheLimitDimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class InitEvents {
@@ -37,31 +42,37 @@ public class InitEvents {
 	@EventListener
 	public void postInit(PostInitEvent event) {
 		Configs.saveAll();
-		//TheLimitBlocks.VOID_FLUID.initialised = true;
-		//showIslands2();
-		/*Properties translations = ((TranslationStorageAccessor) TranslationStorage.getInstance()).getTranslations();
-		JsonObject translation = JsonUtil.readJson("/assets/thelimit/stationapi/lang/en_us.json");
-		translation.entrySet().forEach(entry -> {
-			String key = entry.getKey();
-			String value = entry.getValue().getAsString();
-			translations.put(key, value);
-		});*/
-		
-		//Atlases.getTerrain().idToTex.keySet().forEach(System.out::println);
+		//showMap();
 	}
 	
-	/*@EventListener
-	public void textureInit(ResourcesReloadEvent event) {
-		ExpandableAtlas atlas = Atlases.getTerrain();
-		if (atlas == null) return;
-		atlas.idToTex.keySet().forEach(System.out::println);
-	}*/
-	
-	final PerlinNoise terrainNoise = new PerlinNoise(0);
-	final VoronoiNoise islandNoise = new VoronoiNoise(0);
-	final VoronoiNoise distortX = new VoronoiNoise(1);
-	final VoronoiNoise distortY = new VoronoiNoise(2);
 	final Random random = new Random(0);
+	
+	private void showMap() {
+		BufferedImage img = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);
+		
+		Map<TheLimitBiome, Color> colors = new HashMap<>();
+		TheLimitBiomes.BIOMES.forEach(biome -> {
+			int color = biome.biomeName.hashCode();
+			colors.put(biome, new Color(color | (255 << 24)));
+		});
+		
+		BiomeMap map = new BiomeMap(TheLimitBiomes.BIOMES, 0, 20);
+		Graphics g = img.getGraphics();
+		for (int x = 0; x < 512; x++) {
+			for (int z = 0; z < 512; z++) {
+				TheLimitBiome biome = map.getBiome(x - 256, z - 256);
+				Color color = colors.get(biome);
+				g.setColor(color);
+				g.fillRect(x, z, 1, 1);
+			}
+		}
+		
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(new JLabel(new ImageIcon(img)));
+		frame.pack();
+		frame.setVisible(true);
+	}
 	
 	private void showIslands() {
 		BufferedImage img = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB);

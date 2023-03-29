@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import paulevs.thelimit.TheLimit;
-import paulevs.thelimit.dimension.DimensionTraveler;
+import paulevs.thelimit.world.dimension.DimensionTraveler;
 
 import java.util.Objects;
 

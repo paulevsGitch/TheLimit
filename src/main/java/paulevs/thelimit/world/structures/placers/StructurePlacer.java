@@ -1,4 +1,4 @@
-package paulevs.thelimit.structures.placers;
+package paulevs.thelimit.world.structures.placers;
 
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;

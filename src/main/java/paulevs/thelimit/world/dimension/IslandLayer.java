@@ -1,4 +1,4 @@
-package paulevs.thelimit.dimension;
+package paulevs.thelimit.world.dimension;
 
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.MathHelper;

@@ -1,15 +1,15 @@
-package paulevs.thelimit.structures;
+package paulevs.thelimit.world.structures;
 
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.thelimit.blocks.TheLimitBlocks;
 import paulevs.thelimit.noise.PerlinNoise;
-import paulevs.thelimit.structures.placers.HeightmapPlacer;
-import paulevs.thelimit.structures.placers.StructurePlacer;
-import paulevs.thelimit.structures.placers.VoidPlacer;
-import paulevs.thelimit.structures.scatters.GrassScatter;
-import paulevs.thelimit.structures.scatters.MossScatter;
-import paulevs.thelimit.structures.scatters.SimpleScatter;
+import paulevs.thelimit.world.structures.placers.HeightmapPlacer;
+import paulevs.thelimit.world.structures.placers.StructurePlacer;
+import paulevs.thelimit.world.structures.placers.VoidPlacer;
+import paulevs.thelimit.world.structures.scatters.GrassScatter;
+import paulevs.thelimit.world.structures.scatters.MossScatter;
+import paulevs.thelimit.world.structures.scatters.SimpleScatter;
 
 import java.util.Random;
 

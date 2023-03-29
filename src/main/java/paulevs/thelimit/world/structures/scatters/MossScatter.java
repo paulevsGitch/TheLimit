@@ -1,4 +1,4 @@
-package paulevs.thelimit.structures.scatters;
+package paulevs.thelimit.world.structures.scatters;
 
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.Level;

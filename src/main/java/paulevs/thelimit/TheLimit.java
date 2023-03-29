@@ -6,7 +6,7 @@ import net.minecraft.level.chunk.Chunk;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.registry.ModID;
-import paulevs.thelimit.dimension.TheLimitDimension;
+import paulevs.thelimit.world.dimension.TheLimitDimension;
 
 public class TheLimit {
 	private static final ModID ID = ModID.of("thelimit");

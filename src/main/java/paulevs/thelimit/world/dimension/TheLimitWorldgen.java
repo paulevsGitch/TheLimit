@@ -1,6 +1,7 @@
-package paulevs.thelimit.dimension;
+package paulevs.thelimit.world.dimension;
 
 import net.minecraft.level.Level;
+import net.minecraft.level.biome.Biome;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.source.LevelSource;
 import net.minecraft.util.ProgressListener;
@@ -9,21 +10,20 @@ import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.impl.level.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.level.chunk.StationFlatteningChunk;
-import paulevs.thelimit.biomes.TheLimitBiomes;
 import paulevs.thelimit.blocks.TheLimitBlocks;
 import paulevs.thelimit.noise.PerlinNoise;
-import paulevs.thelimit.structures.TheLimitStructures;
+import paulevs.thelimit.world.biomes.TheLimitBiome;
+import paulevs.thelimit.world.structures.TheLimitStructures;
 
 import java.util.Random;
 import java.util.stream.IntStream;
 
 public class TheLimitWorldgen implements LevelSource {
-	public static TheLimitWorldgen instance;
-	
 	private final IslandLayer layer1;
 	private final IslandLayer layer2;
 	private final IslandLayer layer3;
 	
+	private final Biome[] biomes = new Biome[256];
 	private final InterpolationCell cell1;
 	private final InterpolationCell cell2;
 	private final Level level;
@@ -37,7 +37,6 @@ public class TheLimitWorldgen implements LevelSource {
 		layer2 = new IslandLayer(random.nextInt(), 80, 200, 0.75F);
 		layer3 = new IslandLayer(random.nextInt(), 160, 200, 0.75F);
 		TheLimitStructures.updateDensity(level.getSeed());
-		instance = this;
 	}
 	
 	@Override
@@ -57,11 +56,6 @@ public class TheLimitWorldgen implements LevelSource {
 	
 	@Override
 	public void decorate(LevelSource level, int cx, int cz) {
-		/*if (!level.isChunkLoaded(cx - 1, cz)) return;
-		if (!level.isChunkLoaded(cx + 1, cz)) return;
-		if (!level.isChunkLoaded(cx, cz - 1)) return;
-		if (!level.isChunkLoaded(cx, cz + 1)) return;*/
-		
 		final int wx = cx << 4;
 		final int wz = cz << 4;
 		Chunk chunk = this.level.getChunkFromCache(cx, cz);
@@ -70,19 +64,25 @@ public class TheLimitWorldgen implements LevelSource {
 		
 		TheLimitStructures.SMALL_ISLAND_PLACER.place(this.level, chunk, random, wx, wz);
 		
+		this.level.dimension.biomeSource.getBiomes(biomes, wx, wz, 16, 16);
+		
 		for (short i = 0; i < 256; i++) {
-			int px = i & 15;
-			int pz = i >> 4;
+			if (!(biomes[i] instanceof TheLimitBiome biome)) continue;
+			int px = i >> 4;
+			int pz = i & 15;
+			
 			for (short py = 0; py < 255; py++) {
 				BlockState state = chunk.getBlockState(px, py, pz);
 				if (!state.isOf(TheLimitBlocks.GLAUCOLIT)) continue;
 				if (chunk.getBlockState(px, py + 1, pz).isOf(TheLimitBlocks.GLAUCOLIT)) continue;
-				state = TheLimitBiomes.STELLATA_FOREST.getGround(this.level, random, px | wx, py, pz | wz);
+				state = biome.getGround(this.level, random, px | wx, py, pz | wz);
+				if (state == null) continue;
 				chunk.setBlockState(px, py, pz, state);
 			}
 		}
 		
-		TheLimitBiomes.STELLATA_FOREST.populate(this.level, chunk, random, wx, wz);
+		if (!(biomes[136] instanceof TheLimitBiome biome)) return;
+		biome.populate(this.level, chunk, random, wx, wz);
 	}
 	
 	@Override

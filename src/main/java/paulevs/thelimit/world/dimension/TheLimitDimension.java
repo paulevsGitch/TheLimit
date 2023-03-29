@@ -1,10 +1,8 @@
-package paulevs.thelimit.dimension;
+package paulevs.thelimit.world.dimension;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.level.biome.Biome;
 import net.minecraft.level.dimension.Dimension;
-import net.minecraft.level.gen.FixedBiomeSource;
 import net.minecraft.level.source.LevelSource;
 import net.minecraft.util.maths.Vec3f;
 import net.modificationstation.stationapi.impl.level.StationDimension;
@@ -12,7 +10,6 @@ import paulevs.thelimit.TheLimit;
 
 public class TheLimitDimension extends Dimension implements StationDimension {
 	private final Vec3f skyColor = Vec3f.method_1293(90F / 255F, 40F / 255F, 121F / 255F);
-	//private final float[] skyColor2 = new float[] { 0.5F, 0.2F, 0.0F, 1.0F };
 	
 	public TheLimitDimension(int id) {
 		this.id = id;
@@ -21,7 +18,7 @@ public class TheLimitDimension extends Dimension implements StationDimension {
 	
 	@Override
 	public void initBiomeSource() {
-		this.biomeSource = new FixedBiomeSource(Biome.SKY, 0.5, 0.0);
+		this.biomeSource = new TheLimitBiomeSource(this.level.getSeed());
 	}
 	
 	@Override
@@ -40,11 +37,6 @@ public class TheLimitDimension extends Dimension implements StationDimension {
 	public Vec3f getSkyColour(float f, float g) {
 		return skyColor;
 	}
-	
-	/*@Environment(value=EnvType.CLIENT)
-	public float[] getSunsetDawnColour(float f, float g) {
-		return skyColor2;
-	}*/
 	
 	@Environment(value=EnvType.CLIENT)
 	public boolean hasPaleSky() {

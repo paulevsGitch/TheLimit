@@ -1,9 +1,9 @@
-package paulevs.thelimit.biomes;
+package paulevs.thelimit.world.biomes;
 
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import paulevs.thelimit.blocks.TheLimitBlocks;
-import paulevs.thelimit.structures.TheLimitStructures;
+import paulevs.thelimit.world.structures.TheLimitStructures;
 
 import java.util.Random;
 
@@ -11,6 +11,7 @@ public class StellataForestBiome extends TheLimitBiome {
 	private static final BlockState GROUND = TheLimitBlocks.HYPHUM.getDefaultState();
 	
 	public StellataForestBiome() {
+		setName("Stellata Forest");
 		addStructure(TheLimitStructures.STELLATA_TREE_PLACER);
 		addStructure(TheLimitStructures.STELLATA_TREE_SMALL_PLACER);
 		addStructure(TheLimitStructures.GUTTARBA_PLACER);

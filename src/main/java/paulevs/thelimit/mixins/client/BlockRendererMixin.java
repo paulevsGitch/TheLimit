@@ -27,11 +27,6 @@ public class BlockRendererMixin {
 		}
 	}
 	
-	@Inject(method = "renderFluid", at = @At("RETURN"))
-	private void thelimit_stopRenderFluid(BlockBase block, int x, int y, int z, CallbackInfoReturnable<Boolean> info) {
-		VoidFluidRenderer.side = -1;
-	}
-	
 	@Inject(method = "method_43", at = @At("HEAD"), cancellable = true)
 	private void thelimit_getFluidHeight(int x, int y, int z, Material material, CallbackInfoReturnable<Float> info) {
 		if (!thelimit_apply) return;

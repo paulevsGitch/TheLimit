@@ -1,13 +1,13 @@
-package paulevs.thelimit.structures;
+package paulevs.thelimit.world.structures;
 
 import net.minecraft.level.Level;
 import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
-import paulevs.thelimit.biomes.TheLimitBiomes;
 import paulevs.thelimit.blocks.TheLimitBlocks;
 import paulevs.thelimit.noise.PerlinNoise;
+import paulevs.thelimit.world.biomes.TheLimitBiomes;
 
 import java.util.Random;
 

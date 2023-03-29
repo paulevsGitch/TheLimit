@@ -1,4 +1,4 @@
-package paulevs.thelimit.dimension;
+package paulevs.thelimit.world.dimension;
 
 import net.minecraft.class_467;
 import net.minecraft.entity.EntityBase;
