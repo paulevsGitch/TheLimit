@@ -3,6 +3,7 @@ package paulevs.thelimit.world.dimension;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.level.biome.Biome;
+import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.level.gen.BiomeSource;
 import paulevs.thelimit.world.biomes.TheLimitBiomes;
 
@@ -11,8 +12,13 @@ import java.util.Arrays;
 public class TheLimitBiomeSource extends BiomeSource {
 	private final BiomeMap map;
 	
-	public TheLimitBiomeSource(long seed) {
-		this.map = new BiomeMap(TheLimitBiomes.BIOMES, seed, 100);
+	public TheLimitBiomeSource(long seed, DimensionData data) {
+		this.map = new BiomeMap(TheLimitBiomes.BIOMES, seed, 100, data);
+	}
+	
+	@Override
+	public Biome getBiome(int x, int z) {
+		return map.getBiome(x, z);
 	}
 	
 	@Override

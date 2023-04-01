@@ -1,0 +1,21 @@
+{
+	"credit": "Made by paulevs",
+	"textures": {
+		"0": "thelimit:block/calabellum_stem",
+		"particle": "thelimit:block/calabellum_stem"
+	},
+	"elements": [
+		{
+			"from": [6, 0, 6],
+			"to": [10, 16, 10],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 4, 16], "texture": "#0"},
+				"south": {"uv": [0, 0, 4, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 4, 16], "texture": "#0"},
+				"up": {"uv": [8, 0, 12, 4], "texture": "#0", "cullface": "up"},
+				"down": {"uv": [0, 12, 4, 16], "texture": "#0", "cullface": "down"}
+			}
+		}
+	]
+}

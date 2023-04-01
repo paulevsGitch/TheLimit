@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.thelimit.rendering.VoidFluidRenderer;
 
-@Mixin(Sprite.class)
+@Mixin(value = Sprite.class, remap = false)
 public class SpriteMixin {
 	@Shadow @Final private float uMin;
 	@Shadow @Final private float uMax;

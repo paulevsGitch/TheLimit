@@ -14,9 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.thelimit.blocks.TheLimitBlocks;
 import paulevs.thelimit.rendering.VoidFluidRenderer;
 
-@Mixin(BlockRenderer.class)
-public class BlockRendererMixin {
+@Mixin(value = BlockRenderer.class, priority = 100)
+public abstract class BlockRendererMixin {
 	@Shadow private BlockView blockView;
+	
 	@Unique private boolean thelimit_apply;
 	
 	@Inject(method = "renderFluid", at = @At("HEAD"))

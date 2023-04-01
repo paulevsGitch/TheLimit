@@ -31,8 +31,8 @@ public class SpriteAtlasTextureMixin {
 	
 	@Inject(method = "upload", at = @At("RETURN"))
 	public void thelinit_upload(Data data, CallbackInfo info) {
-		VoidFluidRenderer.sprite_small = this.sprites.get(TheLimit.id("block/chthonia_void_fluid"));
-		VoidFluidRenderer.sprite_big = this.sprites.get(TheLimit.id("block/chthonia_void_fluid"));
+		VoidFluidRenderer.voidFluid = this.sprites.get(TheLimit.id("block/void_fluid"));
+		VoidFluidRenderer.voidFluidEmission = this.sprites.get(TheLimit.id("block/void_fluid_e"));
 	}
 	
 	@Inject(method = "stitch", at = @At(
@@ -42,7 +42,7 @@ public class SpriteAtlasTextureMixin {
 		ordinal = 0
 	), locals = LocalCapture.CAPTURE_FAILHARD)
 	private void thelinit_addTextures(ResourceManager m, Stream<Identifier> s, Profiler p, CallbackInfoReturnable<Data> info, Set<Identifier> set, int i, TextureStitcher ts) {
-		set.add(TheLimit.id("block/chthonia_void_fluid"));
-		set.add(TheLimit.id("block/chthonia_void_fluid"));
+		set.add(TheLimit.id("block/void_fluid"));
+		set.add(TheLimit.id("block/void_fluid_e"));
 	}
 }

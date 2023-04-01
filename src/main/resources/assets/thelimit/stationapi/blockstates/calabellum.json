@@ -1,0 +1,11 @@
+{
+	"variants": {
+		"part=bottom": { "model": "thelimit:block/calabellum_stem_bottom" },
+		"part=middle": { "model": "thelimit:block/calabellum_stem_middle" },
+		"part=top": [
+			{ "model": "thelimit:block/calabellum_fan_2" },
+			{ "model": "thelimit:block/calabellum_fan_2_2" },
+			{ "model": "thelimit:block/calabellum_fan_2_3" }
+		]
+	}
+}

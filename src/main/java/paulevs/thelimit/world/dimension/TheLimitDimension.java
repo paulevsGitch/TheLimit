@@ -3,10 +3,12 @@ package paulevs.thelimit.world.dimension;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.level.dimension.Dimension;
+import net.minecraft.level.dimension.DimensionData;
 import net.minecraft.level.source.LevelSource;
 import net.minecraft.util.maths.Vec3f;
 import net.modificationstation.stationapi.impl.level.StationDimension;
 import paulevs.thelimit.TheLimit;
+import paulevs.thelimit.mixins.common.LevelAccessor;
 
 public class TheLimitDimension extends Dimension implements StationDimension {
 	private final Vec3f skyColor = Vec3f.method_1293(90F / 255F, 40F / 255F, 121F / 255F);
@@ -18,7 +20,10 @@ public class TheLimitDimension extends Dimension implements StationDimension {
 	
 	@Override
 	public void initBiomeSource() {
-		this.biomeSource = new TheLimitBiomeSource(this.level.getSeed());
+		long seed = this.level.getSeed();
+		LevelAccessor accessor = (LevelAccessor) this.level;
+		DimensionData data = accessor.thelimit_getDimensionData();
+		this.biomeSource = new TheLimitBiomeSource(seed, data);
 	}
 	
 	@Override

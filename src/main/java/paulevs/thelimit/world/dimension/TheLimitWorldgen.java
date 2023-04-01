@@ -64,12 +64,11 @@ public class TheLimitWorldgen implements LevelSource {
 		
 		TheLimitStructures.SMALL_ISLAND_PLACER.place(this.level, chunk, random, wx, wz);
 		
-		this.level.dimension.biomeSource.getBiomes(biomes, wx, wz, 16, 16);
-		
 		for (short i = 0; i < 256; i++) {
-			if (!(biomes[i] instanceof TheLimitBiome biome)) continue;
 			int px = i >> 4;
 			int pz = i & 15;
+			
+			TheLimitBiome biome = (TheLimitBiome) this.level.dimension.biomeSource.getBiome(px | wx, pz | wz);
 			
 			for (short py = 0; py < 255; py++) {
 				BlockState state = chunk.getBlockState(px, py, pz);
@@ -81,7 +80,7 @@ public class TheLimitWorldgen implements LevelSource {
 			}
 		}
 		
-		if (!(biomes[136] instanceof TheLimitBiome biome)) return;
+		TheLimitBiome biome = (TheLimitBiome) this.level.dimension.biomeSource.getBiome(8 | wx, 8 | wz);
 		biome.populate(this.level, chunk, random, wx, wz);
 	}
 	

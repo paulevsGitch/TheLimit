@@ -7,7 +7,7 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import paulevs.thelimit.blocks.TheLimitBlocks;
 import paulevs.thelimit.noise.PerlinNoise;
-import paulevs.thelimit.world.biomes.TheLimitBiomes;
+import paulevs.thelimit.world.biomes.TheLimitBiome;
 
 import java.util.Random;
 
@@ -23,8 +23,9 @@ public class SmallIsland extends Structure {
 		int height2 = random.nextInt(5) + 5;
 		fillCone(level, 0, radius, height, x, y - height, z);
 		fillCone(level, radius, 0, height2, x, y, z);
-		cover(level, random, (int) (radius + 4), height2, x, y, z);
-		populate(level, random, x, z);
+		TheLimitBiome biome = (TheLimitBiome) level.dimension.biomeSource.getBiome(x, z);
+		cover(level, random, (int) (radius + 4), height2, x, y, z, biome);
+		populate(level, random, x, z, biome);
 		return true;
 	}
 	
@@ -54,7 +55,7 @@ public class SmallIsland extends Structure {
 		}
 	}
 	
-	private void cover(Level level, Random random, int radius, int height, int x, int y, int z) {
+	private void cover(Level level, Random random, int radius, int height, int x, int y, int z, TheLimitBiome biome) {
 		for (int dx = -radius; dx <= radius; dx++) {
 			int px = x + dx;
 			for (int dz = -radius; dz <= radius; dz++) {
@@ -63,15 +64,17 @@ public class SmallIsland extends Structure {
 					int py = y + dy;
 					if (!level.getBlockState(px, py, pz).isOf(TheLimitBlocks.GLAUCOLIT)) continue;
 					if (level.getBlockState(px, py + 1, pz).isOf(TheLimitBlocks.GLAUCOLIT)) continue;
-					level.setBlockState(px, py, pz, TheLimitBiomes.STELLATA_FOREST.getGround(level, random, px, py, pz));
+					BlockState state = biome.getGround(level, random, px, py, pz);
+					if (state == null) continue;
+					level.setBlockState(px, py, pz, state);
 					break;
 				}
 			}
 		}
 	}
 	
-	private void populate(Level level, Random random, int x, int z) {
-		Chunk chunk = level.getChunkFromCache(x, z);
-		TheLimitBiomes.STELLATA_FOREST.populate(level, chunk, random, x & 0xFFFFFFF0, z & 0xFFFFFFF0);
+	private void populate(Level level, Random random, int x, int z, TheLimitBiome biome) {
+		Chunk chunk = level.getChunkFromCache(x >> 4, z >> 4);
+		biome.populate(level, chunk, random, x & 0xFFFFFFF0, z & 0xFFFFFFF0);
 	}
 }

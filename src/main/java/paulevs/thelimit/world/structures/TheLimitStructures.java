@@ -10,12 +10,16 @@ import paulevs.thelimit.world.structures.placers.VoidPlacer;
 import paulevs.thelimit.world.structures.scatters.GrassScatter;
 import paulevs.thelimit.world.structures.scatters.MossScatter;
 import paulevs.thelimit.world.structures.scatters.SimpleScatter;
+import paulevs.thelimit.world.structures.trees.CalabellumStructure;
+import paulevs.thelimit.world.structures.trees.StellataTreeSmallStructure;
+import paulevs.thelimit.world.structures.trees.StellataTreeStructure;
 
 import java.util.Random;
 
 public class TheLimitStructures {
 	public static final StellataTreeStructure STELLATA_TREE = new StellataTreeStructure();
 	public static final StellataTreeSmallStructure STELLATA_TREE_SMALL = new StellataTreeSmallStructure();
+	public static final CalabellumStructure CALABELLUM = new CalabellumStructure();
 	
 	public static final GrassScatter GUTTARBA = new GrassScatter(
 		4, 30,

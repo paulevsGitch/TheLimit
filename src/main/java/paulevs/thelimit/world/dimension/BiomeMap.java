@@ -1,8 +1,15 @@
 package paulevs.thelimit.world.dimension;
 
+import net.minecraft.level.dimension.DimensionData;
+import net.minecraft.util.io.CompoundTag;
+import net.minecraft.util.io.NBTIO;
 import paulevs.thelimit.noise.PerlinNoise;
 import paulevs.thelimit.world.biomes.TheLimitBiome;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,12 +20,14 @@ public class BiomeMap {
 	private final List<TheLimitBiome> dictionary;
 	private final Random random = new Random(0);
 	private final PerlinNoise[] noises;
+	private final DimensionData data;
 	private final int layers;
 	private final int size;
 	
-	public BiomeMap(List<TheLimitBiome> dictionary, long seed, int size) {
+	public BiomeMap(List<TheLimitBiome> dictionary, long seed, int size, DimensionData data) {
 		this.dictionary = dictionary;
 		this.size = size;
+		this.data = data;
 		
 		int layers = (int) Math.round(Math.log(size) / Math.log(2));
 		if (layers < 1) layers = 1;
@@ -60,9 +69,39 @@ public class BiomeMap {
 			random.setSeed(key);
 			random.nextLong();
 			byte[] data = new byte[4096];
+			
+			File file = this.data.getFile("the_limit/chunk_" + cx + "_" + cz);
+			if (file.exists()) {
+				try {
+					FileInputStream stream = new FileInputStream(file);
+					CompoundTag tag = NBTIO.readGzipped(stream);
+					data = tag.getByteArray("biomes");
+					stream.close();
+					return data;
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
 			for (int i = 0; i < data.length; i++) {
 				data[i] = (byte) random.nextInt(dictionary.size());
 			}
+			
+			CompoundTag tag = new CompoundTag();
+			tag.put("biomes", data);
+			
+			try {
+				file.getParentFile().mkdirs();
+				FileOutputStream stream = new FileOutputStream(file);
+				NBTIO.writeGzipped(tag, stream);
+				stream.flush();
+				stream.close();
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 			return data;
 		});
 		

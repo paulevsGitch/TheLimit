@@ -56,7 +56,7 @@ public class InitEvents {
 			colors.put(biome, new Color(color | (255 << 24)));
 		});
 		
-		BiomeMap map = new BiomeMap(TheLimitBiomes.BIOMES, 0, 20);
+		BiomeMap map = new BiomeMap(TheLimitBiomes.BIOMES, 0, 20, null);
 		Graphics g = img.getGraphics();
 		for (int x = 0; x < 512; x++) {
 			for (int z = 0; z < 512; z++) {

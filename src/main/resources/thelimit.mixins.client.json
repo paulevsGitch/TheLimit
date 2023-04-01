@@ -5,17 +5,19 @@
 	"compatibilityLevel": "JAVA_17",
 	"plugin": "paulevs.thelimit.mixins.plugins.ClientMixinPlugin",
 	"client": [
+		"ModelElementDeserializerMixin",
 		"LightingCalculatorImplMixin",
 		"ArsenicBlockRendererMixin",
 		"SpriteAtlasTextureMixin",
 		"JsonUnbakedModelMixin",
 		"WorldRendererMixin",
 		"BlockRendererMixin",
+		"AreaRendererMixin",
 		"GameRendererMixin",
 		"BakedQuadMixin",
-		"AtlasAccessor",
 		"ShadersMixin",
-		"SpriteMixin"
+		"SpriteMixin",
+		"FluidMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
