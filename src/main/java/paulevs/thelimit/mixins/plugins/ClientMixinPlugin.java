@@ -14,6 +14,9 @@ public class ClientMixinPlugin implements IMixinConfigPlugin {
 		if ("net.mine_diver.glsl.Shaders".equals(targetClassName)) {
 			return FabricLoader.getInstance().isModLoaded("glsl");
 		}
+		else if ("net.minecraft.client.Minecraft".equals(targetClassName)) {
+			return FabricLoader.getInstance().isDevelopmentEnvironment();
+		}
 		return true;
 	}
 	

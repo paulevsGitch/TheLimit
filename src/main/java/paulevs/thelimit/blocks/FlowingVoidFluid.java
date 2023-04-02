@@ -192,9 +192,6 @@ public class FlowingVoidFluid extends TemplateFluid {
 	}
 	
 	private boolean canReplace(Level level, int x, int y, int z) {
-		//Material material = level.getMaterial(x, y, z);
-		//if (material == this.material) return false;
-		//if (material == Material.LAVA) return false;
 		return !this.cantReplace(level, x, y, z);
 	}
 	

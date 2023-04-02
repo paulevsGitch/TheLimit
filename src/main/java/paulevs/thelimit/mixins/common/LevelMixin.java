@@ -75,29 +75,4 @@ public abstract class LevelMixin {
 		
 		this.properties.setSpawnPosition(x, y, z);
 	}
-	
-	//method_248
-	
-	/*@Inject(method = "method_248", at = @At(
-		value = "INVOKE",
-		target = "Lnet/minecraft/level/Level;getChunkFromCache(II)Lnet/minecraft/level/chunk/Chunk;",
-		shift = Shift.AFTER
-	), locals = LocalCapture.PRINT)
-	private void thelimit_customPopulator(CallbackInfo info) {
-	
-	}*/
-	
-	/*@Inject(method = "method_248", at = @At("HEAD"))
-	private void thelimit_customPopulator(CallbackInfo info) {
-		thelimit_populate = true;
-	}
-	
-	@ModifyVariable(method = "method_248", at = @At("STORE"))
-	private Chunk thelimit_customPopulator(Chunk chunk) {
-		if (!thelimit_populate || chunk == null || chunk.method_875(0, 0, 0) == 0) return chunk;
-		System.out.println("Need population!");
-		TheLimitWorldgen.instance.decorate(TheLimitWorldgen.instance, chunk.x, chunk.z);
-		chunk.method_876(0, 0, 0, 0);
-		return chunk;
-	}*/
 }

@@ -7,6 +7,7 @@ import paulevs.thelimit.noise.PerlinNoise;
 import paulevs.thelimit.world.structures.placers.HeightmapPlacer;
 import paulevs.thelimit.world.structures.placers.StructurePlacer;
 import paulevs.thelimit.world.structures.placers.VoidPlacer;
+import paulevs.thelimit.world.structures.scatters.FeatureScatter;
 import paulevs.thelimit.world.structures.scatters.GrassScatter;
 import paulevs.thelimit.world.structures.scatters.MossScatter;
 import paulevs.thelimit.world.structures.scatters.SimpleScatter;
@@ -20,6 +21,11 @@ public class TheLimitStructures {
 	public static final StellataTreeStructure STELLATA_TREE = new StellataTreeStructure();
 	public static final StellataTreeSmallStructure STELLATA_TREE_SMALL = new StellataTreeSmallStructure();
 	public static final CalabellumStructure CALABELLUM = new CalabellumStructure();
+	public static final FeatureScatter CALABELLUM_GROUP = new FeatureScatter(
+		5, 30, CALABELLUM,
+		state -> state.isOf(TheLimitBlocks.VOID_FLUID),
+		state -> state.getBlock().isFullCube()
+	);
 	
 	public static final GrassScatter GUTTARBA = new GrassScatter(
 		4, 30,
@@ -36,6 +42,8 @@ public class TheLimitStructures {
 	
 	public static final StructurePlacer STELLATA_TREE_PLACER = new HeightmapPlacer(STELLATA_TREE, 3);
 	public static final StructurePlacer STELLATA_TREE_SMALL_PLACER = new HeightmapPlacer(STELLATA_TREE_SMALL, 1);
+	public static final StructurePlacer CALABELLUM_GROUP_PLACER = new HeightmapPlacer(CALABELLUM_GROUP, 1);
+	
 	public static final StructurePlacer GUTTARBA_PLACER = new HeightmapPlacer(GUTTARBA, 3);
 	public static final StructurePlacer GLOW_PLANT_PLACER = new HeightmapPlacer(GLOW_PLANT, 1);
 	public static final StructurePlacer MOSS_PLACER = new HeightmapPlacer(MOSS, 10);

@@ -69,12 +69,17 @@ public class TheLimitWorldgen implements LevelSource {
 			int pz = i & 15;
 			
 			TheLimitBiome biome = (TheLimitBiome) this.level.dimension.biomeSource.getBiome(px | wx, pz | wz);
+			BlockState terrain = chunk.getBlockState(px, 0, pz);
+			int height = chunk.getHeight(px, pz);
 			
-			for (short py = 0; py < 255; py++) {
-				BlockState state = chunk.getBlockState(px, py, pz);
-				if (!state.isOf(TheLimitBlocks.GLAUCOLIT)) continue;
-				if (chunk.getBlockState(px, py + 1, pz).isOf(TheLimitBlocks.GLAUCOLIT)) continue;
-				state = biome.getGround(this.level, random, px | wx, py, pz | wz);
+			for (short py = 0; py <= height; py++) {
+				BlockState above = chunk.getBlockState(px, py + 1, pz);
+				if (!TheLimitBlocks.isStone(terrain) || TheLimitBlocks.isStone(above)) {
+					terrain = above;
+					continue;
+				}
+				terrain = above;
+				BlockState state = biome.getGround(this.level, random, px | wx, py, pz | wz);
 				if (state == null) continue;
 				chunk.setBlockState(px, py, pz, state);
 			}
@@ -115,21 +120,25 @@ public class TheLimitWorldgen implements LevelSource {
 		
 		final int wx = x << 4;
 		final int wz = z << 4;
+		Biome[] biomes = new Biome[256];
+		this.level.dimension.biomeSource.getBiomes(biomes, wx, wz, 16, 16);
+		
 		cell1.update(wx, wz);
 		cell2.update(wx, wz);
+		random.setSeed(MathHelper.hashCode(x, (int) this.level.getSeed(), z));
 		IntStream.range(0, sections.length).forEach(index -> {
 			ChunkSection section = new ChunkSection(index);
 			sections[index] = section;
 			int wy = index << 4;
 			for (int i = 0; i < 4096; i++) {
-				int dx = i & 15;
-				int dy = (i >> 4) & 15;
-				int dz = i >> 8;
+				int dx = (i >> 4) & 15;
+				int dy = i >> 8;
+				int dz = i & 15;
 				int py = dy | wy;
 				float density = MathHelper.lerp(0.5F, cell1.get(dx, py, dz), cell2.get(dx, py, dz));
 				if (density < 0.5F) continue;
-				float h = terrainNoise.get((dx | wx) * 0.1, py * 0.1, (dz | wz) * 0.1) * 10 + 5;
-				section.setBlockState(dx, dy, dz, py < h ? vitilit : glaucolit);
+				TheLimitBiome biome = (TheLimitBiome) biomes[i & 255];
+				section.setBlockState(dx, dy, dz, biome.getFiller(this.level, random, x | wx, py, z | wz));
 			}
 		});
 		

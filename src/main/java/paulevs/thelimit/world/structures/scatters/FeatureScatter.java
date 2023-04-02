@@ -1,23 +1,23 @@
 package paulevs.thelimit.world.structures.scatters;
 
-import net.minecraft.block.Fluid;
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
-import paulevs.thelimit.TheLimit;
 
 import java.util.Random;
+import java.util.function.Function;
 
-public abstract class ScatterStructure extends Structure {
-	protected final int radius2;
-	protected final int radius;
-	protected final int count;
+public class FeatureScatter extends ScatterStructure {
+	private final Function<BlockState, Boolean> groundFunction;
+	private final Function<BlockState, Boolean> replaceFunction;
+	private final Structure structure;
 	
-	protected ScatterStructure(int radius, int count) {
-		this.radius2 = radius * 2 + 1;
-		this.radius = radius;
-		this.count = count;
+	public FeatureScatter(int radius, int count, Structure structure, Function<BlockState, Boolean> replaceFunction, Function<BlockState, Boolean> groundFunction) {
+		super(radius, count);
+		this.structure = structure;
+		this.groundFunction = groundFunction;
+		this.replaceFunction = replaceFunction;
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public abstract class ScatterStructure extends Structure {
 			BlockState state = level.getBlockState(pos.getX(), pos.getY() - 1, pos.getZ());
 			for (int j = 0; j < 11; j++) {
 				BlockState below = level.getBlockState(pos.getX(), pos.getY() - 1, pos.getZ());
-				if ((state.isAir() || state.getBlock() instanceof Fluid) && !TheLimit.isReplaceable(below)) {
+				if (replaceFunction.apply(state) && groundFunction.apply(below)) {
 					place(level, random, pos, center);
 					break;
 				}
@@ -42,5 +42,9 @@ public abstract class ScatterStructure extends Structure {
 		return true;
 	}
 	
-	protected abstract void place(Level level, Random random, BlockPos pos, BlockPos center);
+	@Override
+	protected void place(Level level, Random random, BlockPos pos, BlockPos center) {
+		if (!level.getBlockState(pos.getX(), pos.getY() - 1, pos.getZ()).getBlock().isFullCube()) return;
+		structure.generate(level, random, pos.getX(), pos.getY(), pos.getZ());
+	}
 }

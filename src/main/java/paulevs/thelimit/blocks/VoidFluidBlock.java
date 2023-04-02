@@ -14,7 +14,6 @@ import paulevs.thelimit.rendering.VoidFluidRenderer;
 public class VoidFluidBlock extends TemplateFluid {
 	public VoidFluidBlock(Identifier id) {
 		super(id, Material.WATER);
-		//setLightEmittance(1F);
 		setLightOpacity(255);
 		texture = 0;
 	}
@@ -41,9 +40,6 @@ public class VoidFluidBlock extends TemplateFluid {
 	@Environment(value=EnvType.CLIENT)
 	public boolean isSideRendered(BlockView level, int x, int y, int z, int side) {
 		if (side == 1) return true;
-		//Material material = level.getMaterial(x, y, z);
-		//if (material == this.material || material == Material.ICE) return false;
-		//System.out.println(getState(x, y, z));
 		if (isFluid(getState(x, y, z))) return false;
 		return super.isSideRendered(level, x, y, z, side);
 	}

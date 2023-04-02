@@ -15,6 +15,7 @@
 		"AreaRendererMixin",
 		"GameRendererMixin",
 		"BakedQuadMixin",
+		"MinecraftMixin",
 		"ShadersMixin",
 		"SpriteMixin",
 		"FluidMixin"

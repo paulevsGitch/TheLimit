@@ -42,45 +42,20 @@ public class IslandLayer {
 		random.setSeed(seed);
 		
 		float scale = MathHelper.lerp(random.nextFloat(), 1F, 1.5F);
-		float heightScale = 1;//MathHelper.lerp(random.nextFloat(), 1F, 3F);
 		float density = coverage - islandNoise.get(px, pz) * scale;
 		
-		float height = 0;//terrainNoise.get(pos.getX() * 0.01, pos.getZ() * 0.01) * 20 - 10;
-		//height += terrainNoise.get(pos.getX() * 0.03, pos.getZ() * 0.03) * 20 - 10;
+		float height = 0;
 		
-		density += getGradient(pos.getY() + height, -1 * scale, 0, -6 * scale * heightScale);
-		//density += terrainNoise.get(pos.getX() * 0.03, pos.getZ() * 0.03) * 0.1F;
+		density += getGradient(pos.getY() + height, -1 * scale, 0, -6 * scale);
 		density += terrainNoise.get(pos.getX() * 0.1, pos.getZ() * 0.1) * 0.3F - 0.1F;
 		
 		return density;
 	}
 	
 	private float getGradient(float y, float bottom, float middle, float top) {
-		/*if (y < height) {
-			float delta = y / height;
-			delta = MathHelper.lerp(0.75, delta, smoothStep(delta));
-			return MathHelper.lerp(delta, bottom, middle);
-		}
-		else {
-			float delta = (y - height) / (255 - height);
-			delta = MathHelper.lerp(0.75, delta, smoothStep(delta));
-			return MathHelper.lerp(delta, middle, top);
-		}*/
-		
 		float delta = Math.abs(y - height) / 120F;
 		delta = MathHelper.lerp(0.75, delta, smoothStep(delta));
 		return y < height ? MathHelper.lerp(delta, middle, bottom) : MathHelper.lerp(delta, middle, top);
-		
-		/*if (y < height) {
-			//delta /= 120F;
-			//delta = MathHelper.lerp(0.75, delta, smoothStep(delta));
-			return MathHelper.lerp(delta, bottom, middle);
-		}
-		else {
-			//delta /= 135F;
-			//delta = MathHelper.lerp(0.75, delta, smoothStep(delta));
-			return MathHelper.lerp(delta, bottom, middle);
-		}*/
 	}
 	
 	private float smoothStep(float x) {

@@ -27,7 +27,7 @@ public class CalabellumStructure extends Structure {
 		level.setBlockState(x, y, z, getVoidlogged(bottom, level, x, y, z));
 		for (int i = 1; i < h; i++) {
 			int py = y + i;
-			if (!level.getBlockState(x, py, z).isAir()) {
+			if (!level.getBlockState(x, py + 1, z).isAir()) {
 				level.setBlockState(x, py, z, top);
 				return true;
 			}

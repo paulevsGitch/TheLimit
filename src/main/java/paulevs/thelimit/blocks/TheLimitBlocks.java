@@ -2,6 +2,7 @@ package paulevs.thelimit.blocks;
 
 import net.minecraft.block.BlockBase;
 import net.minecraft.level.structure.Structure;
+import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import paulevs.thelimit.TheLimit;
 import paulevs.thelimit.world.structures.TheLimitStructures;
@@ -58,8 +59,9 @@ public class TheLimitBlocks {
 		return block;
 	}
 	
-	public static void init() {
-		//VOID_FLUID_FLOWING.setStillFluid(VOID_FLUID_STILL::getDefaultState);
-		//VOID_FLUID_STILL.setFlowingFluid(VOID_FLUID_FLOWING::getDefaultState);
+	public static void init() {}
+	
+	public static boolean isStone(BlockState state) {
+		return state.isOf(GLAUCOLIT) || state.isOf(VITILIT);
 	}
 }
