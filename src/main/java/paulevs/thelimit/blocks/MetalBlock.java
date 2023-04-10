@@ -7,7 +7,7 @@ import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
 public class MetalBlock extends TemplateBlockBase {
 	public MetalBlock(Identifier identifier) {
 		super(identifier, Material.METAL);
-		setSounds(METAL_SOUNDS);
+		setSounds(TLBlockSounds.METAL);
 		setBlastResistance(2F);
 		setHardness(1F);
 	}
