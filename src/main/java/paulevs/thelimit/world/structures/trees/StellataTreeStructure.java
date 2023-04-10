@@ -7,7 +7,7 @@ import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.thelimit.TheLimit;
 import paulevs.thelimit.blocks.TLBlockProperties;
-import paulevs.thelimit.blocks.TheLimitBlocks;
+import paulevs.thelimit.blocks.TLBlocks;
 
 import java.util.Random;
 
@@ -23,8 +23,8 @@ public class StellataTreeStructure extends Structure {
 	}
 	
 	private void makeTrunk(Level level, int height, int x, int y, int z) {
-		BlockState log = TheLimitBlocks.STELLATA_LOG.getDefaultState();
-		BlockState top = TheLimitBlocks.STELLATA_BARK.getDefaultState();
+		BlockState log = TLBlocks.STELLATA_LOG.getDefaultState();
+		BlockState top = TLBlocks.STELLATA_BARK.getDefaultState();
 		height--;
 		for (int i = 0; i < height; i++) {
 			level.setBlockState(x, y + i, z, log);
@@ -33,8 +33,8 @@ public class StellataTreeStructure extends Structure {
 	}
 	
 	private void makeRoots(Level level, Random random, int x, int y, int z) {
-		BlockState stem = TheLimitBlocks.STELLATA_STEM.getDefaultState();
-		BlockState branch = TheLimitBlocks.STELLATA_BRANCH.getDefaultState();
+		BlockState stem = TLBlocks.STELLATA_STEM.getDefaultState();
+		BlockState branch = TLBlocks.STELLATA_BRANCH.getDefaultState();
 		branch = branch.with(TLBlockProperties.getFaceProp(Direction.DOWN), true);
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 		
@@ -54,9 +54,9 @@ public class StellataTreeStructure extends Structure {
 	}
 	
 	private void makeBranches(Level level, Random random, int x, int y, int z, int height) {
-		BlockState stem = TheLimitBlocks.STELLATA_STEM.getDefaultState();
-		BlockState branch = TheLimitBlocks.STELLATA_BRANCH.getDefaultState();
-		BlockState flower = TheLimitBlocks.STELLATA_FLOWER.getDefaultState();
+		BlockState stem = TLBlocks.STELLATA_STEM.getDefaultState();
+		BlockState branch = TLBlocks.STELLATA_BRANCH.getDefaultState();
+		BlockState flower = TLBlocks.STELLATA_FLOWER.getDefaultState();
 		branch = branch.with(TLBlockProperties.getFaceProp(Direction.UP), true);
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 		

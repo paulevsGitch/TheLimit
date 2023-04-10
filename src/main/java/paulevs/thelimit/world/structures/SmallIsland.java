@@ -5,7 +5,7 @@ import net.minecraft.level.chunk.Chunk;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
-import paulevs.thelimit.blocks.TheLimitBlocks;
+import paulevs.thelimit.blocks.TLBlocks;
 import paulevs.thelimit.noise.PerlinNoise;
 import paulevs.thelimit.world.biomes.TheLimitBiome;
 
@@ -30,7 +30,7 @@ public class SmallIsland extends Structure {
 	}
 	
 	private void fillCone(Level level, float radius1, float radius2, int height, int x, int y, int z) {
-		BlockState filler = TheLimitBlocks.GLAUCOLIT.getDefaultState();
+		BlockState filler = TLBlocks.GLAUCOLIT.getDefaultState();
 		float intensity = Math.max(radius1, radius2) / 50F * 20;
 		for (int i = 0; i < height; i++) {
 			float r = MathHelper.lerp((float) i / height, radius1, radius2);
@@ -62,8 +62,8 @@ public class SmallIsland extends Structure {
 				int pz = z + dz;
 				for (int dy = 0; dy < height; dy++) {
 					int py = y + dy;
-					if (!level.getBlockState(px, py, pz).isOf(TheLimitBlocks.GLAUCOLIT)) continue;
-					if (level.getBlockState(px, py + 1, pz).isOf(TheLimitBlocks.GLAUCOLIT)) continue;
+					if (!level.getBlockState(px, py, pz).isOf(TLBlocks.GLAUCOLIT)) continue;
+					if (level.getBlockState(px, py + 1, pz).isOf(TLBlocks.GLAUCOLIT)) continue;
 					BlockState state = biome.getGround(level, random, px, py, pz);
 					if (state == null) continue;
 					level.setBlockState(px, py, pz, state);

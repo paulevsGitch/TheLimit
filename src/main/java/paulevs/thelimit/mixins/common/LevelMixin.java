@@ -18,14 +18,10 @@ import java.util.Random;
 
 @Mixin(Level.class)
 public abstract class LevelMixin {
-	@Unique private boolean thelimit_populate;
-	
 	@Shadow protected LevelProperties properties;
 	@Shadow public boolean field_221;
 	@Shadow @Final public Dimension dimension;
 	@Shadow public Random rand;
-	
-	@Shadow public abstract int getTopBlockAboveSeaLevel(int i, int j);
 	
 	@Inject(method = "method_212", at = @At("HEAD"), cancellable = true)
 	private void thelimit_changeInitialSpawn(CallbackInfo info) {

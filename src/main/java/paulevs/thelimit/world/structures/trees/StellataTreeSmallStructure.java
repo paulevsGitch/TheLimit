@@ -5,7 +5,7 @@ import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import paulevs.thelimit.TheLimit;
-import paulevs.thelimit.blocks.TheLimitBlocks;
+import paulevs.thelimit.blocks.TLBlocks;
 
 import java.util.Random;
 
@@ -18,8 +18,8 @@ public class StellataTreeSmallStructure extends Structure {
 		BlockPos.Mutable pos = new BlockPos.Mutable(x, y, z);
 		if (!TheLimit.isReplaceable(level.getBlockState(pos))) return false;
 		
-		BlockState stem = TheLimitBlocks.STELLATA_STEM.getDefaultState();
-		BlockState flower = TheLimitBlocks.STELLATA_FLOWER.getDefaultState();
+		BlockState stem = TLBlocks.STELLATA_STEM.getDefaultState();
+		BlockState flower = TLBlocks.STELLATA_FLOWER.getDefaultState();
 		
 		for (byte j = 0; j < height; j++) {
 			if (!TheLimit.isReplaceable(level.getBlockState(pos))) return true;

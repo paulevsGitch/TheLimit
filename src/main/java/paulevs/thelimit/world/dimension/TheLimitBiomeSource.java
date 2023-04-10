@@ -14,6 +14,10 @@ public class TheLimitBiomeSource extends BiomeSource {
 	
 	public TheLimitBiomeSource(long seed, DimensionData data) {
 		this.map = new BiomeMap(TheLimitBiomes.BIOMES, seed, 100, data);
+		double[] arr = new double[] { 1.0 };
+		this.temperatureNoises = arr;
+		this.rainfallNoises = arr;
+		this.detailNoises = arr;
 	}
 	
 	@Override

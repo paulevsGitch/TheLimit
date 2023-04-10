@@ -1,0 +1,54 @@
+{
+	"multipart": [
+		{
+			"apply": [
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3", "y": 270 },
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3", "y": 270 },
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3", "y": 270 }
+			],
+			"when": { "north": "true" }
+		},
+		{
+			"apply": [
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3", "y": 90 },
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3", "y": 90 },
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3", "y": 90 }
+			],
+			"when": { "south": "true" }
+		},
+		{
+			"apply": [
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3" },
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3" },
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3" }
+			],
+			"when": { "east": "true" }
+		},
+		{
+			"apply": [
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3", "y": 180 },
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3", "y": 180 },
+				{ "model": "thelimit:block/niverus_outer_leaves_side_3", "y": 180 }
+			],
+			"when": { "west": "true" }
+		},
+		{
+			"apply": [
+				{ "model": "thelimit:block/niverus_outer_leaves_top", "x": 180 },
+				{ "model": "thelimit:block/niverus_outer_leaves_top", "x": 180, "y": 90 },
+				{ "model": "thelimit:block/niverus_outer_leaves_top", "x": 180, "y": 180 },
+				{ "model": "thelimit:block/niverus_outer_leaves_top", "x": 180, "y": 270 }
+			],
+			"when": { "up": "true" }
+		},
+		{
+			"apply": [
+				{ "model": "thelimit:block/niverus_outer_leaves_top" },
+				{ "model": "thelimit:block/niverus_outer_leaves_top", "y": 90 },
+				{ "model": "thelimit:block/niverus_outer_leaves_top", "y": 180 },
+				{ "model": "thelimit:block/niverus_outer_leaves_top", "y": 270 }
+			],
+			"when": { "down": "true" }
+		}
+	]
+}

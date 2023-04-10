@@ -46,6 +46,6 @@ public class PlantBlock extends TemplateBlockBase {
 	
 	protected boolean canPlace(Level level, BlockPos pos) {
 		BlockState below = level.getBlockState(pos.down());
-		return below.isOf(TheLimitBlocks.HYPHUM);
+		return below.isOf(TLBlocks.HYPHUM);
 	}
 }

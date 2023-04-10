@@ -10,7 +10,7 @@ import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
 import net.modificationstation.stationapi.impl.level.chunk.ChunkSection;
 import net.modificationstation.stationapi.impl.level.chunk.StationFlatteningChunk;
-import paulevs.thelimit.blocks.TheLimitBlocks;
+import paulevs.thelimit.blocks.TLBlocks;
 import paulevs.thelimit.noise.PerlinNoise;
 import paulevs.thelimit.world.biomes.TheLimitBiome;
 import paulevs.thelimit.world.structures.TheLimitStructures;
@@ -74,7 +74,7 @@ public class TheLimitWorldgen implements LevelSource {
 			
 			for (short py = 0; py <= height; py++) {
 				BlockState above = chunk.getBlockState(px, py + 1, pz);
-				if (!TheLimitBlocks.isStone(terrain) || TheLimitBlocks.isStone(above)) {
+				if (!TLBlocks.isStone(terrain) || TLBlocks.isStone(above)) {
 					terrain = above;
 					continue;
 				}
@@ -114,8 +114,8 @@ public class TheLimitWorldgen implements LevelSource {
 	
 	private Chunk generateChunk(int x, int z) {
 		StationFlatteningChunk chunk = new StationFlatteningChunk(level, x, z);
-		BlockState glaucolit = TheLimitBlocks.GLAUCOLIT.getDefaultState();
-		BlockState vitilit = TheLimitBlocks.VITILIT.getDefaultState();
+		BlockState glaucolit = TLBlocks.GLAUCOLIT.getDefaultState();
+		BlockState vitilit = TLBlocks.VITILIT.getDefaultState();
 		ChunkSection[] sections = chunk.sections;
 		
 		final int wx = x << 4;

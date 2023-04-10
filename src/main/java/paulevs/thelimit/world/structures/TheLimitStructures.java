@@ -2,7 +2,7 @@ package paulevs.thelimit.world.structures;
 
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.MathHelper;
-import paulevs.thelimit.blocks.TheLimitBlocks;
+import paulevs.thelimit.blocks.TLBlocks;
 import paulevs.thelimit.noise.PerlinNoise;
 import paulevs.thelimit.world.structures.placers.HeightmapPlacer;
 import paulevs.thelimit.world.structures.placers.StructurePlacer;
@@ -23,20 +23,20 @@ public class TheLimitStructures {
 	public static final CalabellumStructure CALABELLUM = new CalabellumStructure();
 	public static final FeatureScatter CALABELLUM_GROUP = new FeatureScatter(
 		5, 30, CALABELLUM,
-		state -> state.isOf(TheLimitBlocks.VOID_FLUID),
+		state -> state.isOf(TLBlocks.VOID_FLUID),
 		state -> state.getBlock().isFullCube()
 	);
 	
 	public static final GrassScatter GUTTARBA = new GrassScatter(
 		4, 30,
-		TheLimitBlocks.GUTTARBA_SHORT,
-		TheLimitBlocks.GUTTARBA_NORMAL,
-		TheLimitBlocks.GUTTARBA_TALL
+		TLBlocks.GUTTARBA_SHORT,
+		TLBlocks.GUTTARBA_NORMAL,
+		TLBlocks.GUTTARBA_TALL
 	);
 	
-	public static final SimpleScatter GLOW_PLANT = new SimpleScatter(3, 20, TheLimitBlocks.GLOW_PLANT);
+	public static final SimpleScatter GLOW_PLANT = new SimpleScatter(3, 20, TLBlocks.GLOW_PLANT);
 	
-	public static final SimpleScatter MOSS = new MossScatter(2, 2, TheLimitBlocks.MOSS);
+	public static final SimpleScatter MOSS = new MossScatter(2, 2, TLBlocks.MOSS);
 	
 	public static final SmallIsland SMALL_ISLAND = new SmallIsland();
 	

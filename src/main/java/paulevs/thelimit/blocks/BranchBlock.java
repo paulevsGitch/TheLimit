@@ -62,7 +62,7 @@ public class BranchBlock extends TemplateBlockBase {
 		for (byte i = 0; i < 6; i++) {
 			Direction dir = Direction.byId(i);
 			BlockState state = level.getBlockState(pos.set(x, y, z).move(dir));
-			if (dir == Direction.UP && state.isOf(TheLimitBlocks.STELLATA_FLOWER)) {
+			if (dir == Direction.UP && state.isOf(TLBlocks.STELLATA_FLOWER)) {
 				self = self.with(TLBlockProperties.FACES[i], true);
 			}
 			else self = self.with(TLBlockProperties.FACES[i], canConnect(state, dir));

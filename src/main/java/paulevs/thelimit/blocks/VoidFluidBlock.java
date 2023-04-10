@@ -45,7 +45,7 @@ public class VoidFluidBlock extends TemplateFluid {
 	}
 	
 	public static boolean isFluid(BlockState state) {
-		if (state.isOf(TheLimitBlocks.VOID_FLUID)) return true;
+		if (state.isOf(TLBlocks.VOID_FLUID)) return true;
 		return state.getProperties().contains(TLBlockProperties.VOIDLOGGED) && state.get(TLBlockProperties.VOIDLOGGED);
 	}
 	

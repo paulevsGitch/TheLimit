@@ -2,13 +2,13 @@ package paulevs.thelimit.world.biomes;
 
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
-import paulevs.thelimit.blocks.TheLimitBlocks;
+import paulevs.thelimit.blocks.TLBlocks;
 import paulevs.thelimit.world.structures.TheLimitStructures;
 
 import java.util.Random;
 
 public class StellataForestBiome extends TheLimitBiome {
-	private static final BlockState GROUND = TheLimitBlocks.HYPHUM.getDefaultState();
+	private static final BlockState GROUND = TLBlocks.HYPHUM.getDefaultState();
 	
 	public StellataForestBiome() {
 		setName("Stellata Forest");

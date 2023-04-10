@@ -12,6 +12,7 @@ public class TLBlockProperties {
 	public static final EnumProperty<Axis> AXIS = EnumProperty.of("axis", Axis.class);
 	public static final BooleanProperty[] FACES = new BooleanProperty[6];
 	public static final BooleanProperty VOIDLOGGED = BooleanProperty.of("voidlogged");
+	public static final BooleanProperty BOTTOM = BooleanProperty.of("bottom");
 	
 	public static BooleanProperty getFaceProp(Direction dir) {
 		return FACES[dir.getId()];

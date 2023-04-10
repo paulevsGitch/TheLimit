@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import paulevs.thelimit.blocks.TLBlockProperties;
-import paulevs.thelimit.blocks.TheLimitBlocks;
+import paulevs.thelimit.blocks.TLBlocks;
 import paulevs.thelimit.rendering.VoidFluidRenderer;
 
 @Mixin(value = ArsenicBlockRenderer.class, remap = false)
@@ -51,7 +51,7 @@ public abstract class ArsenicBlockRendererMixin {
 	
 	@Inject(method = "renderFluid", at = @At("HEAD"), cancellable = true)
 	private void thelimit_stopRenderFluidLayered(BlockBase block, int x, int y, int z, CallbackInfoReturnable<Boolean> info) {
-		if (block != TheLimitBlocks.VOID_FLUID) return;
+		if (block != TLBlocks.VOID_FLUID) return;
 		if (VoidFluidRenderer.layer != -1) return;
 		VoidFluidRenderer.layer = 0;
 		this.renderFluid(block, x, y, z);
@@ -67,7 +67,7 @@ public abstract class ArsenicBlockRendererMixin {
 			BlockState state = ((BlockStateView) blockRendererAccessor.getBlockView()).getBlockState(x, y, z);
 			if (!state.getProperties().contains(TLBlockProperties.VOIDLOGGED)) return;
 			if (!state.get(TLBlockProperties.VOIDLOGGED)) return;
-			renderFluid(TheLimitBlocks.VOID_FLUID, x, y, z);
+			renderFluid(TLBlocks.VOID_FLUID, x, y, z);
 			cir.setReturnValue(true);
 			info.cancel();
 		}

@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"bottom=false": { "model": "thelimit:block/niverus_vine" },
+		"bottom=true": { "model": "thelimit:block/niverus_vine_bottom" }
+	}
+}

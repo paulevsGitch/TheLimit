@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import paulevs.thelimit.blocks.TheLimitBlocks;
+import paulevs.thelimit.blocks.TLBlocks;
 import paulevs.thelimit.rendering.VoidFluidRenderer;
 
 @Mixin(value = BlockRenderer.class, priority = 100)
@@ -22,7 +22,7 @@ public abstract class BlockRendererMixin {
 	
 	@Inject(method = "renderFluid", at = @At("HEAD"))
 	private void thelimit_renderFluid(BlockBase block, int x, int y, int z, CallbackInfoReturnable<Boolean> info) {
-		thelimit_apply = block == TheLimitBlocks.VOID_FLUID;
+		thelimit_apply = block == TLBlocks.VOID_FLUID;
 		if (thelimit_apply) {
 			VoidFluidRenderer.POS.set(x, y, z);
 		}

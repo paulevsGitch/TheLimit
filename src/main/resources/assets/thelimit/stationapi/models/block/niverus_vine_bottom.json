@@ -1,0 +1,7 @@
+{
+	"parent": "thelimit:block/cross_overlay",
+	"textures": {
+		"cross": "thelimit:block/niverus_vine_bottom",
+		"overlay": "thelimit:block/niverus_vine_bottom_e"
+	}
+}

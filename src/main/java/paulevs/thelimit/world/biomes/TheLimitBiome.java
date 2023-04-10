@@ -4,7 +4,7 @@ import net.minecraft.level.Level;
 import net.minecraft.level.biome.Biome;
 import net.minecraft.level.chunk.Chunk;
 import net.modificationstation.stationapi.api.block.BlockState;
-import paulevs.thelimit.blocks.TheLimitBlocks;
+import paulevs.thelimit.blocks.TLBlocks;
 import paulevs.thelimit.world.structures.placers.StructurePlacer;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class TheLimitBiome extends Biome {
-	private static final BlockState GLAUCOLIT = TheLimitBlocks.GLAUCOLIT.getDefaultState();
+	private static final BlockState GLAUCOLIT = TLBlocks.GLAUCOLIT.getDefaultState();
 	private final List<StructurePlacer> placers = new ArrayList<>();
 	
 	public TheLimitBiome() {

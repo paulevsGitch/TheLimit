@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "thelimit:block/niverus_vine_bottom"
+	}
+}

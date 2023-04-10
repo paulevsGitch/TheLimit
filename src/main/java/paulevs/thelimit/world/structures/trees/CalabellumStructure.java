@@ -6,7 +6,7 @@ import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import paulevs.thelimit.blocks.TLBlockProperties;
 import paulevs.thelimit.blocks.TLBlockProperties.TriplePart;
-import paulevs.thelimit.blocks.TheLimitBlocks;
+import paulevs.thelimit.blocks.TLBlocks;
 import paulevs.thelimit.blocks.VoidFluidBlock;
 
 import java.util.Random;
@@ -17,7 +17,7 @@ public class CalabellumStructure extends Structure {
 		if (!level.getBlockState(x, y - 1, z).getBlock().isFullCube()) return false;
 		if (!level.getBlockState(x, y + 1, z).isAir()) return false;
 		
-		BlockState state = TheLimitBlocks.CALABELLUM.getDefaultState();
+		BlockState state = TLBlocks.CALABELLUM.getDefaultState();
 		BlockState bottom = state.with(TLBlockProperties.TRIPLE_PART, TriplePart.BOTTOM);
 		BlockState middle = state.with(TLBlockProperties.TRIPLE_PART, TriplePart.MIDDLE);
 		BlockState top = state.with(TLBlockProperties.TRIPLE_PART, TriplePart.TOP);

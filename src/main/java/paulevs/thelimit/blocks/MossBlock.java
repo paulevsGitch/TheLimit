@@ -1,6 +1,7 @@
 package paulevs.thelimit.blocks;
 
 import net.minecraft.block.BlockBase;
+import net.minecraft.block.material.Material;
 import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
@@ -101,7 +102,7 @@ public class MossBlock extends PlantBlock {
 	}
 	
 	private boolean isSupport(BlockState state) {
-		return state.isOpaque() && state.getBlock().isFullCube();
+		return (state.getMaterial() == Material.LEAVES || state.isOpaque()) && state.getBlock().isFullCube();
 	}
 	
 	private BlockState getFacingState(Level level, int x, int y, int z) {
