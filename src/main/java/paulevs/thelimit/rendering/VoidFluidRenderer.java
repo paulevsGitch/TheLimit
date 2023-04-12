@@ -1,11 +1,14 @@
 package paulevs.thelimit.rendering;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.client.texture.Sprite;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.world.BlockStateView;
 import paulevs.thelimit.blocks.VoidFluidBlock;
 
+@Environment(EnvType.CLIENT)
 public class VoidFluidRenderer {
 	public static final BlockPos.Mutable POS = new BlockPos.Mutable();
 	public static Sprite voidFluid;

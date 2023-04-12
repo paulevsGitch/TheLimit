@@ -21,7 +21,9 @@
 		"stationapi:event_bus": [
 			"paulevs.thelimit.events.InitEvents"
 		],
-		"stationapi:event_bus_client": [],
+		"stationapi:event_bus_client": [
+			"paulevs.thelimit.events.ClientEvents"
+		],
 		"stationapi:event_bus_server": []
 	},
 	"mixins": [

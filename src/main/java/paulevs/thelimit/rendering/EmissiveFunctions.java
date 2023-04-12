@@ -1,5 +1,7 @@
 package paulevs.thelimit.rendering;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.modificationstation.stationapi.api.block.BlockState;
@@ -16,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+@Environment(EnvType.CLIENT)
 public class EmissiveFunctions {
 	private static final Map<Identifier, Function<BlockPos, Float>> FUNCTIONS = new HashMap<>();
 	

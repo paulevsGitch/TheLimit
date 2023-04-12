@@ -1,5 +1,7 @@
 package paulevs.thelimit.rendering;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.mine_diver.glsl.Shaders;
 import net.minecraft.client.Minecraft;
@@ -12,6 +14,7 @@ import org.lwjgl.opengl.GL14;
 
 import java.util.Random;
 
+@Environment(EnvType.CLIENT)
 public class SkyRenderer {
 	private static final boolean USE_SHADERS = FabricLoader.getInstance().isModLoaded("glsl");
 	private static final Vec3f FOG_COLOR = new Vec3f();

@@ -53,6 +53,8 @@ public class TLBlocks {
 	public static final BlockBase BISMUTH_BLOCK = make("bismuth_block", MetalBlock::new);
 	public static final BlockBase BISMUTH_TILES = make("bismuth_tiles", MetalBlock::new);
 	public static final BlockBase BISMUTH_LARGE_TILE = make("bismuth_large_tile", MetalBlock::new);
+	public static final BlockBase BISMUTH_DECORATED = make("bismuth_decorated", MetalBlobBlock::new);
+	public static final BlockBase BISMUTH_LANTERN = make("bismuth_lantern", MetalLantern::new);
 	
 	private static <T extends BlockBase> T make(String name, Function<Identifier, T> constructor) {
 		Identifier id = TheLimit.id(name);
@@ -72,6 +74,7 @@ public class TLBlocks {
 	
 	public static void init() {
 		((TemplateBlockBase) NIVERUS_VINE).setLightEmittance(0.75F);
+		((TemplateBlockBase) HYPHUM).setSounds(TLBlockSounds.HYPHUM);
 	}
 	
 	public static boolean isStone(BlockState state) {

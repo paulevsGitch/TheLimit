@@ -1,0 +1,7 @@
+{
+	"parent": "thelimit:block/cube_all_e",
+	"textures": {
+		"all": "thelimit:block/bismuth_lantern",
+		"emission": "thelimit:block/bismuth_lantern_e"
+	}
+}

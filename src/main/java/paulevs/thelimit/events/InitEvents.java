@@ -58,7 +58,6 @@ public class InitEvents {
 	@EventListener
 	public void postInit(PostInitEvent event) {
 		Configs.saveAll();
-		//showMap();
 	}
 	
 	private void addToolList(ToolBase tool, List<BlockBase> blocks) {
