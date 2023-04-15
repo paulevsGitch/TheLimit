@@ -2,7 +2,6 @@ package paulevs.thelimit.blocks;
 
 import net.minecraft.block.BlockBase;
 import net.minecraft.item.ItemBase;
-import net.minecraft.item.ItemInstance;
 import net.minecraft.level.structure.Structure;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;

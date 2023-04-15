@@ -2,9 +2,9 @@ package paulevs.thelimit.blocks.basic;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.BlockView;
+import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
@@ -13,7 +13,10 @@ import net.modificationstation.stationapi.api.world.BlockStateView;
 import paulevs.thelimit.rendering.AutoTextureBlock;
 import paulevs.thelimit.rendering.BlobTileHelper;
 
+import java.util.function.Function;
+
 public class BlobBlock extends TemplateBlockBase implements AutoTextureBlock {
+	private final Function<BlockState, Boolean> check = state -> state.isOf(this);
 	private final int[] textures = new int[47];
 	private final String textureID;
 	
@@ -31,7 +34,7 @@ public class BlobBlock extends TemplateBlockBase implements AutoTextureBlock {
 	
 	@Override
 	public int getTextureForSide(BlockView view, int x, int y, int z, int side) {
-		return getConnectedTextureForSide(view, x, y, z, side, this);
+		return getConnectedTextureForSide(view, x, y, z, side, check);
 	}
 	
 	@Override
@@ -39,7 +42,7 @@ public class BlobBlock extends TemplateBlockBase implements AutoTextureBlock {
 		return textures[15];
 	}
 	
-	public int getConnectedTextureForSide(BlockView view, int x, int y, int z, int side, BlockBase filter) {
+	public int getConnectedTextureForSide(BlockView view, int x, int y, int z, int side, Function<BlockState, Boolean> filter) {
 		if (!(view instanceof BlockStateView bsView)) return textures[15];
 		return textures[BlobTileHelper.getTexture(bsView, x, y, z, filter, Direction.byId(side))];
 	}

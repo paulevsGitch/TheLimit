@@ -2,51 +2,52 @@ package paulevs.thelimit.rendering;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockBase;
+import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.world.BlockStateView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
 public class BlobTileHelper {
 	private static final short[] VALUES = new short[256];
 	
-	public static int getTexture(BlockStateView view, int x, int y, int z, BlockBase target, Direction face) {
+	public static int getTexture(BlockStateView view, int x, int y, int z, Function<BlockState, Boolean> filter, Direction face) {
 		int index = 0;
 		switch (face) {
 			case UP, DOWN -> {
-				if (view.getBlockState(x - 1, y, z - 1).getBlock() == target) index += 1;
-				if (view.getBlockState(x, y, z - 1).getBlock() == target) index += 2;
-				if (view.getBlockState(x + 1, y, z - 1).getBlock() == target) index += 4;
-				if (view.getBlockState(x + 1, y, z).getBlock() == target) index += 8;
-				if (view.getBlockState(x + 1, y, z + 1).getBlock() == target) index += 16;
-				if (view.getBlockState(x, y, z + 1).getBlock() == target) index += 32;
-				if (view.getBlockState(x - 1, y, z + 1).getBlock() == target) index += 64;
-				if (view.getBlockState(x - 1, y, z).getBlock() == target) index += 128;
+				if (filter.apply(view.getBlockState(x - 1, y, z - 1))) index += 1;
+				if (filter.apply(view.getBlockState(x, y, z - 1))) index += 2;
+				if (filter.apply(view.getBlockState(x + 1, y, z - 1))) index += 4;
+				if (filter.apply(view.getBlockState(x + 1, y, z))) index += 8;
+				if (filter.apply(view.getBlockState(x + 1, y, z + 1))) index += 16;
+				if (filter.apply(view.getBlockState(x, y, z + 1))) index += 32;
+				if (filter.apply(view.getBlockState(x - 1, y, z + 1))) index += 64;
+				if (filter.apply(view.getBlockState(x - 1, y, z))) index += 128;
 			}
 			case NORTH, SOUTH -> {
 				int dz = face == Direction.SOUTH ? 1 : -1;
-				if (view.getBlockState(x, y + 1, z + dz).getBlock() == target) index += 1;
-				if (view.getBlockState(x, y + 1, z).getBlock() == target) index += 2;
-				if (view.getBlockState(x, y + 1, z - dz).getBlock() == target) index += 4;
-				if (view.getBlockState(x, y, z - dz).getBlock() == target) index += 8;
-				if (view.getBlockState(x, y - 1, z - dz).getBlock() == target) index += 16;
-				if (view.getBlockState(x, y - 1, z).getBlock() == target) index += 32;
-				if (view.getBlockState(x, y - 1, z + dz).getBlock() == target) index += 64;
-				if (view.getBlockState(x, y, z + dz).getBlock() == target) index += 128;
+				if (filter.apply(view.getBlockState(x, y + 1, z + dz))) index += 1;
+				if (filter.apply(view.getBlockState(x, y + 1, z))) index += 2;
+				if (filter.apply(view.getBlockState(x, y + 1, z - dz))) index += 4;
+				if (filter.apply(view.getBlockState(x, y, z - dz))) index += 8;
+				if (filter.apply(view.getBlockState(x, y - 1, z - dz))) index += 16;
+				if (filter.apply(view.getBlockState(x, y - 1, z))) index += 32;
+				if (filter.apply(view.getBlockState(x, y - 1, z + dz))) index += 64;
+				if (filter.apply(view.getBlockState(x, y, z + dz))) index += 128;
 			}
 			case EAST, WEST -> {
 				int dx = face == Direction.EAST ? 1 : -1;
-				if (view.getBlockState(x + dx, y + 1, z).getBlock() == target) index += 1;
-				if (view.getBlockState(x, y + 1, z).getBlock() == target) index += 2;
-				if (view.getBlockState(x - dx, y + 1, z).getBlock() == target) index += 4;
-				if (view.getBlockState(x - dx, y, z).getBlock() == target) index += 8;
-				if (view.getBlockState(x - dx, y - 1, z).getBlock() == target) index += 16;
-				if (view.getBlockState(x, y - 1, z).getBlock() == target) index += 32;
-				if (view.getBlockState(x + dx, y - 1, z).getBlock() == target) index += 64;
-				if (view.getBlockState(x + dx, y, z).getBlock() == target) index += 128;
+				if (filter.apply(view.getBlockState(x + dx, y + 1, z))) index += 1;
+				if (filter.apply(view.getBlockState(x, y + 1, z))) index += 2;
+				if (filter.apply(view.getBlockState(x - dx, y + 1, z))) index += 4;
+				if (filter.apply(view.getBlockState(x - dx, y, z))) index += 8;
+				if (filter.apply(view.getBlockState(x - dx, y - 1, z))) index += 16;
+				if (filter.apply(view.getBlockState(x, y - 1, z))) index += 32;
+				if (filter.apply(view.getBlockState(x + dx, y - 1, z))) index += 64;
+				if (filter.apply(view.getBlockState(x + dx, y, z))) index += 128;
 			}
 		}
 		return VALUES[index];

@@ -5,8 +5,6 @@ import net.minecraft.item.ItemInstance;
 import net.minecraft.level.Level;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
-import paulevs.thelimit.blocks.TLBlockProperties;
-import paulevs.thelimit.blocks.TLBlockProperties.SlabShape;
 
 import java.util.List;
 import java.util.function.Supplier;

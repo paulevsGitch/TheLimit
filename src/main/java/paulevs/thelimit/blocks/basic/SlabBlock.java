@@ -25,7 +25,6 @@ import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 import net.modificationstation.stationapi.api.world.BlockStateView;
 import paulevs.thelimit.blocks.TLBlockProperties;
 import paulevs.thelimit.blocks.TLBlockProperties.SlabShape;
-import paulevs.thelimit.rendering.BlobTileHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +108,13 @@ public class SlabBlock extends TemplateBlockBase {
 	@Override
 	public int getTextureForSide(BlockView view, int x, int y, int z, int side) {
 		if (source instanceof BlobBlock block) {
-			return block.getConnectedTextureForSide(view, x, y, z, side, this);
+			return block.getConnectedTextureForSide(view, x, y, z, side, state -> {
+				if (!state.isOf(this)) return false;
+				BlockState self = ((BlockStateView) view).getBlockState(x, y, z);
+				SlabShape slab1 = self.get(TLBlockProperties.SLAB);
+				SlabShape slab2 = state.get(TLBlockProperties.SLAB);
+				return slab1 == slab2;
+			});
 		}
 		return source.getTextureForSide(view, x, y, z, side);
 	}
