@@ -1,7 +1,8 @@
-package paulevs.thelimit.blocks;
+package paulevs.thelimit.blocks.basic;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.BlockBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.level.BlockView;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
@@ -30,12 +31,16 @@ public class BlobBlock extends TemplateBlockBase implements AutoTextureBlock {
 	
 	@Override
 	public int getTextureForSide(BlockView view, int x, int y, int z, int side) {
-		if (!(view instanceof BlockStateView bsView)) return textures[15];
-		return textures[BlobTileHelper.getTexture(bsView, x, y, z, this, Direction.byId(side))];
+		return getConnectedTextureForSide(view, x, y, z, side, this);
 	}
 	
 	@Override
 	public int getTextureForSide(int i) {
 		return textures[15];
+	}
+	
+	public int getConnectedTextureForSide(BlockView view, int x, int y, int z, int side, BlockBase filter) {
+		if (!(view instanceof BlockStateView bsView)) return textures[15];
+		return textures[BlobTileHelper.getTexture(bsView, x, y, z, filter, Direction.byId(side))];
 	}
 }

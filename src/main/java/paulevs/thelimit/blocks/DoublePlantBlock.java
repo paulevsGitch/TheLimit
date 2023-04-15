@@ -9,6 +9,7 @@ import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import paulevs.thelimit.blocks.TLBlockProperties.TopBottom;
+import paulevs.thelimit.blocks.basic.PlantBlock;
 
 import java.util.Collections;
 import java.util.List;

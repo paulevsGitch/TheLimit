@@ -1,4 +1,4 @@
-package paulevs.thelimit.blocks;
+package paulevs.thelimit.blocks.basic;
 
 import net.minecraft.block.BlockBase;
 import net.minecraft.block.material.Material;
@@ -11,6 +11,7 @@ import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.Direction;
+import paulevs.thelimit.blocks.TLBlockProperties;
 
 public class MossBlock extends PlantBlock {
 	public MossBlock(Identifier identifier) {

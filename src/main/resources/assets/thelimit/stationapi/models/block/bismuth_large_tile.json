@@ -1,6 +1,0 @@
-{
-	"parent": "minecraft:block/cube_all",
-	"textures": {
-		"all": "thelimit:block/bismuth_large_tile"
-	}
-}

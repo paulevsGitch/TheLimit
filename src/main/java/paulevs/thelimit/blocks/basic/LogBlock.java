@@ -1,4 +1,4 @@
-package paulevs.thelimit.blocks;
+package paulevs.thelimit.blocks.basic;
 
 import net.minecraft.block.BlockBase;
 import net.minecraft.block.material.Material;
@@ -8,6 +8,7 @@ import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
+import paulevs.thelimit.blocks.TLBlockProperties;
 
 public class LogBlock extends TemplateBlockBase {
 	public LogBlock(Identifier identifier) {

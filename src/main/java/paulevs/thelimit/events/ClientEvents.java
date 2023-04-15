@@ -4,8 +4,10 @@ import net.mine_diver.unsafeevents.listener.EventListener;
 import net.modificationstation.stationapi.api.client.event.texture.TextureRegisterEvent;
 import net.modificationstation.stationapi.api.client.texture.atlas.Atlases;
 import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtlas;
+import paulevs.thelimit.TheLimit;
 import paulevs.thelimit.blocks.TLBlocks;
 import paulevs.thelimit.rendering.AutoTextureBlock;
+import paulevs.thelimit.rendering.VoidFluidRenderer;
 
 public class ClientEvents {
 	@EventListener
@@ -16,5 +18,7 @@ public class ClientEvents {
 				((AutoTextureBlock) block).registerTextures(atlas);
 			}
 		});
+		VoidFluidRenderer.voidFluid = atlas.addTexture(TheLimit.id("block/void_fluid")).index;
+		VoidFluidRenderer.voidFluidEmission = atlas.addTexture(TheLimit.id("block/void_fluid_e")).index;
 	}
 }

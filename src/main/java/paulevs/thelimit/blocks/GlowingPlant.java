@@ -1,6 +1,7 @@
 package paulevs.thelimit.blocks;
 
 import net.modificationstation.stationapi.api.registry.Identifier;
+import paulevs.thelimit.blocks.basic.PlantBlock;
 
 public class GlowingPlant extends PlantBlock {
 	public GlowingPlant(Identifier identifier) {

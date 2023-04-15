@@ -1,4 +1,4 @@
-package paulevs.thelimit.blocks;
+package paulevs.thelimit.blocks.basic;
 
 import net.minecraft.level.BlockView;
 import net.minecraft.level.Level;
@@ -6,6 +6,7 @@ import net.minecraft.util.maths.Box;
 import net.modificationstation.stationapi.api.block.BlockState;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.util.math.Direction.Axis;
+import paulevs.thelimit.blocks.TLBlockProperties;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,8 @@
-package paulevs.thelimit.blocks;
+package paulevs.thelimit.blocks.basic;
 
 import net.minecraft.block.material.Material;
 import net.modificationstation.stationapi.api.registry.Identifier;
+import paulevs.thelimit.blocks.TLBlockSounds;
 
 public class MetalBlobBlock extends BlobBlock {
 	public MetalBlobBlock(Identifier identifier) {

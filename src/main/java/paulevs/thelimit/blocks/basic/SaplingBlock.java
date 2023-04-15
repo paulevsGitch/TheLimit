@@ -1,4 +1,4 @@
-package paulevs.thelimit.blocks;
+package paulevs.thelimit.blocks.basic;
 
 import net.minecraft.level.Level;
 import net.minecraft.level.structure.Structure;

@@ -27,7 +27,7 @@ public class VoidFluidBlock extends TemplateFluid {
 	@Override
 	public int getTextureForSide(int side) {
 		VoidFluidRenderer.side = side;
-		return 0;
+		return VoidFluidRenderer.layer > 0 ? VoidFluidRenderer.voidFluidEmission : VoidFluidRenderer.voidFluid;
 	}
 	
 	@Override

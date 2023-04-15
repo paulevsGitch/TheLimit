@@ -9,6 +9,7 @@ import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 public class TLBlockProperties {
 	public static final EnumProperty<TriplePart> TRIPLE_PART = EnumProperty.of("part", TriplePart.class);
 	public static final EnumProperty<TopBottom> TOP_BOTTOM = EnumProperty.of("part", TopBottom.class);
+	public static final EnumProperty<SlabShape> SLAB = EnumProperty.of("shape", SlabShape.class);
 	public static final EnumProperty<Axis> AXIS = EnumProperty.of("axis", Axis.class);
 	public static final BooleanProperty[] FACES = new BooleanProperty[6];
 	public static final BooleanProperty VOIDLOGGED = BooleanProperty.of("voidlogged");
@@ -45,6 +46,37 @@ public class TLBlockProperties {
 		@Override
 		public String asString() {
 			return name;
+		}
+	}
+	
+	public enum SlabShape implements StringIdentifiable {
+		BOTTOM("bottom"),
+		TOP("top"),
+		EAST("east"),
+		WEST("west"),
+		NORTH("north"),
+		SOUTH("south"),
+		FULL("full");
+		
+		private static final SlabShape[] VALUES = values();
+		private final String name;
+		
+		SlabShape(String name) {
+			this.name = name;
+		}
+		
+		@Override
+		public String asString() {
+			return name;
+		}
+		
+		public static SlabShape fromDirection(Direction dir) {
+			return VALUES[dir.ordinal()];
+		}
+		
+		public Direction getDirection() {
+			if (this == FULL) return null;
+			return Direction.byId(this.ordinal());
 		}
 	}
 	

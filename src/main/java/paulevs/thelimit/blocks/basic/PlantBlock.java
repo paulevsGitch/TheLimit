@@ -1,4 +1,4 @@
-package paulevs.thelimit.blocks;
+package paulevs.thelimit.blocks.basic;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.level.Level;
@@ -8,6 +8,7 @@ import net.modificationstation.stationapi.api.block.States;
 import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
+import paulevs.thelimit.blocks.TLBlocks;
 
 public class PlantBlock extends TemplateBlockBase {
 	public PlantBlock(Identifier identifier) {

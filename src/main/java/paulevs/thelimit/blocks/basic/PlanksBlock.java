@@ -1,4 +1,4 @@
-package paulevs.thelimit.blocks;
+package paulevs.thelimit.blocks.basic;
 
 import net.minecraft.block.material.Material;
 import net.modificationstation.stationapi.api.registry.Identifier;
