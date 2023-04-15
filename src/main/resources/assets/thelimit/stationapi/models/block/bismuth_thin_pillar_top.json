@@ -1,0 +1,10 @@
+{
+	"credit": "Made by paulevs",
+	"parent": "thelimit:block/thin_pillar_top",
+	"textures": {
+		"0": "thelimit:block/bismuth_pillar_ends",
+		"1": "thelimit:block/bismuth_pillar_middle",
+		"2": "thelimit:block/bismuth_pillar_top",
+		"3": "thelimit:block/bismuth_decorated/bismuth_decorated_5"
+	}
+}

@@ -43,6 +43,4 @@ public class VineBlock extends PlantBlock {
 			level.setBlockState(x, y + 1, z, state.with(TLBlockProperties.BOTTOM, true));
 		}
 	}
-	
-	
 }

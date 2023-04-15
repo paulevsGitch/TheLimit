@@ -1,0 +1,16 @@
+{
+	"variants": {
+		"axis=x,shape=small": { "model": "thelimit:block/vitilit_thin_pillar_small", "x": 90, "y": 180 },
+		"axis=x,shape=bottom": { "model": "thelimit:block/vitilit_thin_pillar_bottom", "x": 90, "y": 180 },
+		"axis=x,shape=middle": { "model": "thelimit:block/vitilit_thin_pillar_middle", "x": 90, "y": 180 },
+		"axis=x,shape=top": { "model": "thelimit:block/vitilit_thin_pillar_top", "x": 90, "y": 180 },
+		"axis=y,shape=small": { "model": "thelimit:block/vitilit_thin_pillar_small" },
+		"axis=y,shape=bottom": { "model": "thelimit:block/vitilit_thin_pillar_bottom" },
+		"axis=y,shape=middle": { "model": "thelimit:block/vitilit_thin_pillar_middle" },
+		"axis=y,shape=top": { "model": "thelimit:block/vitilit_thin_pillar_top" },
+		"axis=z,shape=small": { "model": "thelimit:block/vitilit_thin_pillar_small", "x": 90, "y": 270 },
+		"axis=z,shape=bottom": { "model": "thelimit:block/vitilit_thin_pillar_bottom", "x": 90, "y": 270 },
+		"axis=z,shape=middle": { "model": "thelimit:block/vitilit_thin_pillar_middle", "x": 90, "y": 270 },
+		"axis=z,shape=top": { "model": "thelimit:block/vitilit_thin_pillar_top", "x": 90, "y": 270 }
+	}
+}

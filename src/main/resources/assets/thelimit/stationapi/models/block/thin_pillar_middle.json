@@ -1,0 +1,18 @@
+{
+	"credit": "Made by paulevs",
+	"textures": {
+		"particle": "#0"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 3],
+			"to": [13, 16, 13],
+			"faces": {
+				"north": {"uv": [3, 0, 13, 16], "texture": "#1"},
+				"east": {"uv": [3, 0, 13, 16], "texture": "#1"},
+				"south": {"uv": [3, 0, 13, 16], "texture": "#1"},
+				"west": {"uv": [3, 0, 13, 16], "texture": "#1"}
+			}
+		}
+	]
+}

@@ -20,6 +20,7 @@ import paulevs.thelimit.blocks.basic.SaplingBlock;
 import paulevs.thelimit.blocks.basic.SlabBlock;
 import paulevs.thelimit.blocks.basic.StemBlock;
 import paulevs.thelimit.blocks.basic.StoneBlock;
+import paulevs.thelimit.blocks.basic.ThinPillarBlock;
 import paulevs.thelimit.blocks.basic.VineBlock;
 import paulevs.thelimit.items.TLItems;
 import paulevs.thelimit.world.structures.TheLimitStructures;
@@ -34,9 +35,11 @@ public class TLBlocks {
 	
 	public static final BlockBase GLAUCOLIT = make("glaucolit", StoneBlock::new);
 	public static final BlockBase GLAUCOLIT_SLAB = makeSlab("glaucolit_slab", GLAUCOLIT);
+	public static final BlockBase GLAUCOLIT_THIN_PILLAR = makeThinPillar("glaucolit_thin_pillar", GLAUCOLIT);
 	
 	public static final BlockBase VITILIT = make("vitilit", StoneBlock::new);
 	public static final BlockBase VITILIT_SLAB = makeSlab("vitilit_slab", VITILIT);
+	public static final BlockBase VITILIT_THIN_PILLAR = makeThinPillar("vitilit_thin_pillar", VITILIT);
 	
 	public static final BlockBase HYPHUM = make("hyphum", StoneBlock::new);
 	
@@ -73,6 +76,7 @@ public class TLBlocks {
 	public static final BlockBase BISMUTH_ORE = makeOre("bismuth_ore", () -> TLItems.BISMUTH, 1, 3);
 	public static final BlockBase BISMUTH_BLOCK = make("bismuth_block", MetalBlock::new);
 	public static final BlockBase BISMUTH_SLAB = makeSlab("bismuth_slab", BISMUTH_BLOCK);
+	public static final BlockBase BISMUTH_THIN_PILLAR = makeThinPillar("bismuth_thin_pillar", BISMUTH_BLOCK);
 	
 	public static final BlockBase BISMUTH_TILES = make("bismuth_tiles", MetalBlock::new);
 	public static final BlockBase BISMUTH_TILES_SLAB = makeSlab("bismuth_tiles_slab", BISMUTH_TILES);
@@ -104,6 +108,14 @@ public class TLBlocks {
 	private static SlabBlock makeSlab(String name, BlockBase source) {
 		Identifier id = TheLimit.id(name);
 		SlabBlock block = new SlabBlock(id, source);
+		block.setTranslationKey(id.toString());
+		BLOCKS.add(block);
+		return block;
+	}
+	
+	private static ThinPillarBlock makeThinPillar(String name, BlockBase source) {
+		Identifier id = TheLimit.id(name);
+		ThinPillarBlock block = new ThinPillarBlock(id, source);
 		block.setTranslationKey(id.toString());
 		BLOCKS.add(block);
 		return block;

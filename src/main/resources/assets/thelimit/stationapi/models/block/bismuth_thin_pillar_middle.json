@@ -1,0 +1,7 @@
+{
+	"credit": "Made by paulevs",
+	"parent": "thelimit:block/thin_pillar_middle",
+	"textures": {
+		"1": "thelimit:block/bismuth_pillar_middle"
+	}
+}

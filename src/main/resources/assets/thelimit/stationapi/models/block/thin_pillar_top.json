@@ -1,0 +1,41 @@
+{
+	"credit": "Made by paulevs",
+	"textures": {
+		"particle": "#0"
+	},
+	"elements": [
+		{
+			"from": [1, 13, 1],
+			"to": [15, 16, 15],
+			"faces": {
+				"north": {"uv": [1, 0, 15, 3], "texture": "#0"},
+				"east": {"uv": [1, 0, 15, 3], "texture": "#0"},
+				"south": {"uv": [1, 0, 15, 3], "texture": "#0"},
+				"west": {"uv": [1, 0, 15, 3], "texture": "#0"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#2", "cullface": "up"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#2"}
+			}
+		},
+		{
+			"from": [2, 10, 2],
+			"to": [14, 13, 14],
+			"faces": {
+				"north": {"uv": [2, 3, 14, 6], "texture": "#0"},
+				"east": {"uv": [2, 3, 14, 6], "texture": "#0"},
+				"south": {"uv": [2, 3, 14, 6], "texture": "#0"},
+				"west": {"uv": [2, 3, 14, 6], "texture": "#0"},
+				"down": {"uv": [2, 2, 14, 14], "texture": "#3"}
+			}
+		},
+		{
+			"from": [3, 0, 3],
+			"to": [13, 10, 13],
+			"faces": {
+				"north": {"uv": [3, 6, 13, 16], "texture": "#1"},
+				"east": {"uv": [3, 6, 13, 16], "texture": "#1"},
+				"south": {"uv": [3, 6, 13, 16], "texture": "#1"},
+				"west": {"uv": [3, 6, 13, 16], "texture": "#1"}
+			}
+		}
+	]
+}

@@ -1,0 +1,9 @@
+{
+	"credit": "Made by paulevs",
+	"parent": "thelimit:block/thin_pillar_small",
+	"textures": {
+		"0": "thelimit:block/vitilit_pillar_small",
+		"2": "thelimit:block/vitilit",
+		"3": "thelimit:block/vitilit"
+	}
+}
