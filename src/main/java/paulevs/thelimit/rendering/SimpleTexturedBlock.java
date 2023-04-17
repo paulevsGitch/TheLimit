@@ -5,7 +5,7 @@ import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtl
 import net.modificationstation.stationapi.api.registry.BlockRegistry;
 import net.modificationstation.stationapi.api.registry.Identifier;
 
-public interface SimpleTexturedBlock extends AutoTextureBlock {
+public interface SimpleTexturedBlock extends AutoTextured {
 	@Override
 	default void registerTextures(ExpandableAtlas atlas) {
 		BlockBase block = (BlockBase) this;

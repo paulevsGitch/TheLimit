@@ -10,12 +10,12 @@ import net.modificationstation.stationapi.api.registry.Identifier;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
 import net.modificationstation.stationapi.api.util.math.Direction;
 import net.modificationstation.stationapi.api.world.BlockStateView;
-import paulevs.thelimit.rendering.AutoTextureBlock;
+import paulevs.thelimit.rendering.AutoTextured;
 import paulevs.thelimit.rendering.BlobTileHelper;
 
 import java.util.function.Function;
 
-public class BlobBlock extends TemplateBlockBase implements AutoTextureBlock {
+public class BlobBlock extends TemplateBlockBase implements AutoTextured {
 	private final Function<BlockState, Boolean> check = state -> state.isOf(this);
 	private final int[] textures = new int[47];
 	private final String textureID;

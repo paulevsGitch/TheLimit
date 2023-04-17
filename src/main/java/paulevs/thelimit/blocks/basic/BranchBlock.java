@@ -12,7 +12,6 @@ import net.modificationstation.stationapi.api.state.StateManager.Builder;
 import net.modificationstation.stationapi.api.template.block.TemplateBlockBase;
 import net.modificationstation.stationapi.api.util.math.BlockPos;
 import net.modificationstation.stationapi.api.util.math.Direction;
-import net.modificationstation.stationapi.api.util.math.Direction.Axis;
 import paulevs.thelimit.blocks.TLBlockProperties;
 import paulevs.thelimit.blocks.TLBlocks;
 
